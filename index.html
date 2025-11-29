@@ -46,6 +46,8 @@
                 --sichtung-gelb: #ffc107;
                 --sichtung-gruen: #28a745;
                 --status-entlassen: #6c757d;
+                --section-header-bg: #1a1a1a;
+                --section-header-text: #ffffff;
             }
         }
 
@@ -80,6 +82,8 @@
                 --sichtung-gelb: #ffc107;
                 --sichtung-gruen: #28a745;
                 --status-entlassen: #6c757d;
+                --section-header-bg: #dc3545;
+                --section-header-text: #ffffff;
             }
         }
 
@@ -94,6 +98,98 @@
             max-width: 1400px;
             margin: 0 auto;
         }
+
+        /* Login Screen */
+        .login-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .login-screen.hidden {
+            display: none;
+        }
+
+        .login-container {
+            background: var(--bg-secondary);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .login-logo {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .login-logo .logo {
+            height: 60px;
+            width: 60px;
+        }
+
+        .login-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .login-subtitle {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .login-functions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn-login-function {
+            padding: 20px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-login-function:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .btn-login-function .icon {
+            font-size: 28px;
+        }
+
+        .btn-login-function.einsatzleitung { border-color: var(--accent-red); }
+        .btn-login-function.einsatzleitung:hover { background: var(--accent-red); color: white; }
+        .btn-login-function.fuehrungsassistent { border-color: var(--accent-green); }
+        .btn-login-function.fuehrungsassistent:hover { background: var(--accent-green); color: white; }
+        .btn-login-function.mc1 { border-color: var(--accent-cyan); }
+        .btn-login-function.mc1:hover { background: var(--accent-cyan); color: white; }
+        .btn-login-function.mc2 { border-color: var(--accent-purple); }
+        .btn-login-function.mc2:hover { background: var(--accent-purple); color: white; }
 
         /* Header mit Logos */
         header {
@@ -124,7 +220,6 @@
         .logo {
             height: 50px;
             width: auto;
-            /* Platzhalter-Styling falls kein Bild */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -135,9 +230,7 @@
             border: 1px solid #ddd;
         }
         
-        /* SC Logo Placeholder Style */
         .logo-sc { width: 50px; height: 50px; font-weight: bold; }
-        /* DRK Logo Placeholder Style */
         .logo-drk { width: 50px; height: 50px; font-weight: bold; }
 
         h1 {
@@ -148,9 +241,55 @@
             line-height: 1.2;
         }
 
+        .user-info {
+            background: var(--bg-tertiary);
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .user-function {
+            font-weight: 600;
+            color: var(--accent-blue);
+        }
+
+        .btn-logout {
+            padding: 5px 10px;
+            background: var(--btn-secondary);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+
+        .btn-logout:hover {
+            background: var(--btn-secondary-hover);
+        }
+
+        .btn-end-mission {
+            padding: 5px 10px;
+            background: var(--accent-red);
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .btn-end-mission:hover {
+            background: var(--accent-red-hover);
+        }
+
         .header-actions {
             display: flex;
             gap: 10px;
+            align-items: center;
         }
 
         .btn-export {
@@ -168,6 +307,15 @@
 
         .btn-export:hover {
             background: var(--btn-secondary-hover);
+        }
+
+        .btn-export.csv {
+            background: var(--accent-green);
+            color: white;
+        }
+
+        .btn-export.csv:hover {
+            background: #218838;
         }
 
         .tabs {
@@ -240,7 +388,7 @@
         .form-row-5 {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
-            gap: 10px;
+            gap: 12px;
             margin-bottom: 15px;
         }
 
@@ -281,7 +429,8 @@
 
         input:focus, select:focus, textarea:focus {
             outline: none;
-            border-color: var(--border-hover);
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.1);
         }
 
         textarea {
@@ -326,25 +475,33 @@
             background: var(--btn-secondary-hover);
         }
 
-        /* Kompakte Sichtungskategorien */
+        /* Sichtungskategorien - GROSS */
         .sichtung-compact {
             display: flex;
-            gap: 8px;
+            gap: 10px;
         }
 
         .btn-sichtung-compact {
             flex: 1;
-            padding: 8px 4px;
-            border: 2px solid var(--border-color);
-            border-radius: 4px;
+            padding: 15px 8px;
+            border: 3px solid var(--border-color);
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 16px;
+            font-weight: 700;
             text-transform: uppercase;
             transition: all 0.2s;
             background: var(--bg-tertiary);
             color: var(--text-primary);
             text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-sichtung-compact .icon {
+            font-size: 24px;
         }
 
         .btn-sichtung-compact:hover {
@@ -352,7 +509,7 @@
         }
 
         .btn-sichtung-compact.active {
-            border-width: 3px;
+            border-width: 4px;
         }
 
         .btn-sichtung-compact.sk1 { border-color: var(--sichtung-rot); }
@@ -364,37 +521,47 @@
         .btn-sichtung-compact.sk3 { border-color: var(--sichtung-gruen); }
         .btn-sichtung-compact.sk3.active { background: var(--sichtung-gruen); color: white; }
 
-        /* Kategorie Buttons */
+        /* Kategorie Buttons - GROSS wie Sichtung */
         .kategorie-buttons {
             display: flex;
-            gap: 5px;
+            gap: 10px;
             flex-wrap: wrap;
         }
 
         .btn-kategorie {
-            padding: 6px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
+            flex: 1;
+            padding: 15px 8px;
+            border: 3px solid var(--border-color);
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 11px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
             text-transform: uppercase;
             transition: all 0.2s;
             background: var(--bg-tertiary);
             color: var(--text-primary);
-            flex: 1;
             text-align: center;
-            min-width: 80px;
+            min-width: 70px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .btn-kategorie .icon {
+            font-size: 20px;
         }
 
         .btn-kategorie:hover {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
+            border-color: var(--accent-blue);
         }
 
         .btn-kategorie.active {
             border-color: var(--accent-blue);
             background: var(--accent-blue);
             color: white;
+            border-width: 4px;
         }
 
         /* Geschlechts-Icons */
@@ -424,38 +591,39 @@
             color: white;
         }
 
-        /* Verletztenstatus - Optimiert & Kompakt */
+        /* Verletztenstatus - GRÖSSER */
         .verletztenstatus-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-            gap: 6px;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
         }
 
         .btn-verletztenstatus {
-            padding: 6px 4px; /* Weniger Padding */
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
+            padding: 12px 8px;
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 11px; /* Etwas größer für Lesbarkeit */
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: 700;
             text-transform: uppercase;
             transition: all 0.2s;
             background: var(--bg-tertiary);
             color: var(--text-primary);
             text-align: center;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 6px; /* Abstand Icon zu Text */
+            gap: 6px;
         }
 
         .btn-verletztenstatus:hover {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
             background: var(--bg-secondary);
         }
 
         .btn-verletztenstatus.active {
-            border-width: 1px; /* Border nicht zu dick */
+            border-width: 3px;
             box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
         }
 
@@ -466,31 +634,135 @@
         .btn-verletztenstatus.active.reanimiert { border-color: var(--accent-red); background: var(--accent-red); color: white; }
 
         .btn-verletztenstatus .icon {
-            font-size: 14px;
+            font-size: 28px;
             display: inline-block;
             line-height: 1;
         }
 
-        /* Kompakte Sections */
+        /* NEUE Kompakte Sections mit besserer Optik */
         .compact-section {
-            background: var(--bg-tertiary);
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 10px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 20px;
+            overflow: hidden;
         }
 
-        .compact-section h4 {
-            margin-bottom: 8px;
-            font-size: 11px;
-            font-weight: 600;
+        .compact-section-header {
+            background: var(--section-header-bg);
+            color: var(--section-header-text);
+            padding: 12px 16px;
+            font-size: 14px;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 3px solid var(--accent-red);
+        }
+
+        .compact-section-header .header-icon {
+            font-size: 18px;
+        }
+
+        .compact-section-body {
+            padding: 20px;
+            background: var(--bg-tertiary);
+        }
+
+        /* ABCDE Beurteilung - Verbessert */
+        .abcde-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+        }
+
+        .abcde-item {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+
+        .abcde-item:hover {
+            border-color: var(--accent-red);
+        }
+
+        .abcde-item:focus-within {
+            border-color: var(--accent-red);
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+        }
+
+        .abcde-letter {
+            background: var(--accent-red);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .abcde-letter.a { background: #dc3545; }
+        .abcde-letter.b { background: #fd7e14; }
+        .abcde-letter.c { background: #ffc107; color: #000; }
+        .abcde-letter.d { background: #28a745; }
+        .abcde-letter.e { background: #17a2b8; }
+
+        .abcde-label {
+            padding: 8px 10px;
+            font-size: 11px;
+            text-transform: uppercase;
             color: var(--text-secondary);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 4px;
+            background: var(--bg-tertiary);
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .abcde-item select {
+            width: 100%;
+            border: none;
+            border-radius: 0;
+            padding: 12px 10px;
+            font-size: 13px;
+            background: var(--bg-secondary);
+        }
+
+        .abcde-item select:focus {
+            outline: none;
+            box-shadow: none;
         }
 
         /* Vitalwerte */
+        .vitalwerte-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .vitalwert-card {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .vitalwert-header {
+            background: var(--bg-tertiary);
+            padding: 8px 12px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .vitalwert-body {
+            padding: 12px;
+        }
+
         .vitalwerte-input {
             display: flex;
             gap: 5px;
@@ -499,40 +771,44 @@
 
         .vitalwerte-input input {
             flex: 1;
-            padding: 6px;
-            font-size: 13px;
+            padding: 8px;
+            font-size: 14px;
         }
 
         .btn-add-vital {
-            padding: 6px 10px;
+            padding: 8px 12px;
             background: var(--accent-green);
             color: white;
             border: none;
-            border-radius: 2px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 11px;
-            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 700;
             white-space: nowrap;
         }
 
+        .btn-add-vital:hover {
+            background: #218838;
+        }
+
         .vital-history {
-            margin-top: 5px;
+            margin-top: 8px;
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 4px;
             max-height: 80px;
             overflow-y: auto;
         }
 
         .vital-entry {
-            background: var(--bg-secondary);
-            padding: 4px 8px;
-            border-radius: 2px;
-            font-size: 11px;
+            background: var(--bg-tertiary);
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 2px solid var(--accent-blue);
+            border-left: 3px solid var(--accent-blue);
         }
 
         .btn-delete-vital {
@@ -541,8 +817,15 @@
             border: none;
             cursor: pointer;
             padding: 0 4px;
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1;
+        }
+
+        /* Adresse Section */
+        .adresse-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+            gap: 12px;
         }
 
         /* Ressourcen-Verwaltung */
@@ -832,6 +1115,36 @@
             background: var(--btn-secondary-hover);
         }
 
+        /* Transport Button - GRÖSSER & FARBIG */
+        .btn-transport {
+            width: 100%;
+            padding: 12px 10px;
+            background: linear-gradient(135deg, var(--accent-orange), var(--accent-red));
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+            transition: all 0.2s;
+        }
+
+        .btn-transport:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+        }
+
+        .btn-transport .icon {
+            font-size: 18px;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -887,11 +1200,68 @@
             line-height: 1;
         }
 
+        .modal-warning {
+            background: var(--accent-red);
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .modal-warning .icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .modal-export-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+
+        .btn-modal-export {
+            padding: 15px 30px;
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-modal-export:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-modal-export .icon {
+            font-size: 28px;
+        }
+
         .log-section {
             background: var(--bg-secondary);
             padding: 25px;
             border-radius: 2px;
             margin-top: 30px;
+        }
+
+        .log-section.readonly {
+            opacity: 0.9;
+        }
+
+        .log-section.readonly .log-header-top::after {
+            content: '(Nur Lesen)';
+            color: var(--text-tertiary);
+            font-size: 12px;
+            margin-left: 10px;
         }
 
         .log-header {
@@ -973,6 +1343,7 @@
 
         .log-number { color: var(--accent-red); font-weight: bold; }
         .log-time { color: var(--text-secondary); font-weight: 500; }
+        .log-function { color: var(--accent-blue); font-weight: 600; }
 
         .priority-badge {
             padding: 3px 8px;
@@ -1039,12 +1410,30 @@
 
         .btn-ambulant:hover { background: #5a32a3; }
 
+        .patient-export-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+        }
+
+        /* Textarea gleiche Größe */
+        .equal-textarea {
+            min-height: 60px !important;
+            max-height: 60px !important;
+            resize: none !important;
+        }
+
         @media (max-width: 1024px) {
             .standard-messages-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
             .resources-grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
             .patients-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
-            .verletztenstatus-grid { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); }
+            .verletztenstatus-grid { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); }
             .form-row-5 { grid-template-columns: repeat(2, 1fr); }
+            .kategorie-buttons { flex-wrap: wrap; }
+            .btn-kategorie { min-width: 60px; }
+            .abcde-grid { grid-template-columns: repeat(3, 1fr); }
+            .vitalwerte-grid { grid-template-columns: repeat(2, 1fr); }
+            .adresse-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -1065,15 +1454,61 @@
             .kategorie-buttons { flex-direction: column; }
             .btn-kategorie { width: 100%; }
             .patient-actions-row { flex-direction: column; }
+            .login-functions { grid-template-columns: 1fr; }
+            .sichtung-compact { flex-direction: column; }
+            .abcde-grid { grid-template-columns: 1fr; }
+            .vitalwerte-grid { grid-template-columns: 1fr; }
+            .adresse-grid { grid-template-columns: 1fr; }
+            .modal-export-buttons { flex-direction: column; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <div class="login-logo">
+                <div class="logo logo-sc">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <circle cx="50" cy="50" r="48" fill="white" stroke="black" stroke-width="2"/>
+                        <text x="50" y="55" text-anchor="middle" font-size="25" font-family="Arial" font-weight="bold">SC</text>
+                    </svg>
+                </div>
+                <div class="logo logo-drk">
+                    <svg viewBox="0 0 100 100" width="100%" height="100%">
+                        <circle cx="50" cy="50" r="48" fill="white" stroke="#dc3545" stroke-width="2"/>
+                        <rect x="40" y="20" width="20" height="60" fill="#dc3545"/>
+                        <rect x="20" y="40" width="60" height="20" fill="#dc3545"/>
+                    </svg>
+                </div>
+            </div>
+            <h2 class="login-title">Einsatzdokumentation</h2>
+            <p class="login-subtitle">Sanitätsdienst SC Freiburg - Bitte Funktion wählen</p>
+            <div class="login-functions">
+                <button class="btn-login-function einsatzleitung" onclick="login('Einsatzleitung')">
+                    <span class="icon">👨‍✈️</span>
+                    <span>Einsatzleitung</span>
+                </button>
+                <button class="btn-login-function fuehrungsassistent" onclick="login('Führungsassistent')">
+                    <span class="icon">📋</span>
+                    <span>Führungsassistent</span>
+                </button>
+                <button class="btn-login-function mc1" onclick="login('MC 1')">
+                    <span class="icon">🏥</span>
+                    <span>MC 1</span>
+                </button>
+                <button class="btn-login-function mc2" onclick="login('MC 2')">
+                    <span class="icon">🏥</span>
+                    <span>MC 2</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="mainApp" style="display: none;">
         <header>
             <div class="header-content">
                 <div class="logo-container">
-                    <!-- Platzhalter für SC Freiburg Logo -->
                     <div class="logo logo-sc">
                         <svg viewBox="0 0 100 100" width="100%" height="100%">
                             <circle cx="50" cy="50" r="48" fill="white" stroke="black" stroke-width="2"/>
@@ -1084,7 +1519,12 @@
                 </div>
             </div>
             <div class="header-actions">
-                <!-- Platzhalter für DRK Logo -->
+                <div class="user-info">
+                    <span>Angemeldet als:</span>
+                    <span class="user-function" id="currentUserFunction">-</span>
+                    <button class="btn-logout" onclick="logout()">Abmelden</button>
+                    <button class="btn-end-mission hidden" id="btnEndMission" onclick="openEndMissionModal()">🛑 Einsatz beenden</button>
+                </div>
                 <div class="logo logo-drk">
                      <svg viewBox="0 0 100 100" width="100%" height="100%">
                         <circle cx="50" cy="50" r="48" fill="white" stroke="#dc3545" stroke-width="2"/>
@@ -1092,22 +1532,18 @@
                         <rect x="20" y="40" width="60" height="20" fill="#dc3545"/>
                     </svg>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 5px; justify-content: center;">
-                    <button class="btn-export" onclick="exportToJSON()">Export JSON</button>
-                    <button class="btn-export" onclick="printProtocol()">Drucken</button>
-                </div>
             </div>
         </header>
 
-        <div class="tabs">
-            <button class="tab-button active" onclick="switchTab('meldungen')">Meldungen</button>
-            <button class="tab-button" onclick="switchTab('ressourcen')">Ressourcen</button>
-            <button class="tab-button" onclick="switchTab('patienten')">Patienten</button>
+        <div class="tabs" id="mainTabs">
+            <button class="tab-button active" onclick="switchTab('meldungen')" id="tabMeldungen">Meldungen</button>
+            <button class="tab-button" onclick="switchTab('ressourcen')" id="tabRessourcen">Ressourcen</button>
+            <button class="tab-button" onclick="switchTab('patienten')" id="tabPatienten">Patienten</button>
         </div>
 
         <!-- Tab: Meldungen -->
         <div id="tab-meldungen" class="tab-content active">
-            <div class="form-section">
+            <div class="form-section" id="meldungFormSection">
                 <form id="einsatzForm">
                     <div class="form-row">
                         <div class="form-group">
@@ -1130,13 +1566,16 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group" style="grid-column: 1 / -1;">
+                        <div class="form-group">
+                            <label>Funktion</label>
+                            <input type="text" id="funktion" readonly>
+                        </div>
+                        <div class="form-group">
                             <label class="required">Absender</label>
                             <input type="text" id="absender" value="FüASs" required>
                         </div>
                     </div>
 
-                    <!-- Wiederhergestellte Kategorien gemäß Screenshot -->
                     <div class="standard-messages-grid">
                         <div class="form-group">
                             <label>POSTEN EINSATZBEREIT</label>
@@ -1231,12 +1670,15 @@
                 </form>
             </div>
 
-            <!-- Protokoll NUR HIER -->
-            <div class="log-section">
+            <!-- Protokoll -->
+            <div class="log-section" id="logSection">
                 <div class="log-header">
                     <div class="log-header-top">
                         <h2 class="log-title">Protokoll</h2>
-                        <span class="log-count">Einträge: <span id="entryCount">0</span> / <span id="totalCount">0</span></span>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <button class="btn-export csv" onclick="exportMeldungenCSV()">📥 Meldungen CSV</button>
+                            <span class="log-count">Einträge: <span id="entryCount">0</span> / <span id="totalCount">0</span></span>
+                        </div>
                     </div>
                     
                     <div class="filter-row">
@@ -1319,12 +1761,12 @@
 
         <!-- Tab: Patienten -->
         <div id="tab-patienten" class="tab-content">
-            <div class="patient-actions-row">
+            <div class="patient-actions-row" id="patientActionsRow">
                 <button class="btn-new-patient" onclick="togglePatientForm(true, 'standard')">+ Neuen Patienten anlegen</button>
                 <button class="btn-ambulant" onclick="togglePatientForm(true, 'ambulant')">🩹 Ambulant versorgt</button>
             </div>
 
-            <!-- Container für das Formular (standardmäßig ausgeblendet) -->
+            <!-- Container für das Formular -->
             <div id="patientFormContainer" class="hidden">
                 <div class="form-section">
                     <h3 style="margin-bottom: 20px; font-size: 18px; font-weight: 400;">
@@ -1337,41 +1779,65 @@
                         
                         <!-- Sichtung & Kategorie -->
                         <div class="form-row">
-                            <div class="form-group">
+                            <div class="form-group" id="sichtungGroup">
                                 <label class="required">Sichtungskategorie</label>
                                 <div class="sichtung-compact">
-                                    <button type="button" class="btn-sichtung-compact sk1" onclick="selectSichtung('SK1')">SK1 Rot</button>
-                                    <button type="button" class="btn-sichtung-compact sk2" onclick="selectSichtung('SK2')">SK2 Gelb</button>
-                                    <button type="button" class="btn-sichtung-compact sk3" onclick="selectSichtung('SK3')">SK3 Grün</button>
+                                    <button type="button" class="btn-sichtung-compact sk1" onclick="selectSichtung('SK1')">
+                                        <span class="icon">🔴</span>
+                                        <span>SK1 Rot</span>
+                                    </button>
+                                    <button type="button" class="btn-sichtung-compact sk2" onclick="selectSichtung('SK2')">
+                                        <span class="icon">🟡</span>
+                                        <span>SK2 Gelb</span>
+                                    </button>
+                                    <button type="button" class="btn-sichtung-compact sk3" onclick="selectSichtung('SK3')">
+                                        <span class="icon">🟢</span>
+                                        <span>SK3 Grün</span>
+                                    </button>
                                 </div>
                                 <input type="hidden" id="patientSichtung" required>
                             </div>
                             <div class="form-group">
                                 <label class="required">Kategorie</label>
                                 <div class="kategorie-buttons">
-                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Chir.')">Chir.</button>
-                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Int.')">Int.</button>
-                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Neuro')">Neuro</button>
-                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Päd.')">Päd.</button>
-                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Sonst.')">Sonst.</button>
+                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Chir.')">
+                                        <span class="icon">🩹</span>
+                                        <span>Chir.</span>
+                                    </button>
+                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Int.')">
+                                        <span class="icon">❤️</span>
+                                        <span>Int.</span>
+                                    </button>
+                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Neuro')">
+                                        <span class="icon">🧠</span>
+                                        <span>Neuro</span>
+                                    </button>
+                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Päd.')">
+                                        <span class="icon">👶</span>
+                                        <span>Päd.</span>
+                                    </button>
+                                    <button type="button" class="btn-kategorie" onclick="selectKategorie('Sonst.')">
+                                        <span class="icon">📋</span>
+                                        <span>Sonst.</span>
+                                    </button>
                                 </div>
                                 <input type="hidden" id="patientKategorie" required>
                             </div>
                         </div>
 
                         <!-- Persönliche Daten -->
-                        <div class="form-row-4">
+                        <div class="form-row-4" id="personalDataRow">
                             <div class="form-group">
                                 <label class="required">Nachname</label>
-                                <input type="text" id="patientNachname" placeholder="Nachname" required>
+                                <input type="text" id="patientNachname" placeholder="Nachname" required tabindex="1">
                             </div>
                             <div class="form-group">
                                 <label>Vorname</label>
-                                <input type="text" id="patientVorname" placeholder="Vorname">
+                                <input type="text" id="patientVorname" placeholder="Vorname" tabindex="2">
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ambulant-hide">
                                 <label>Alter</label>
-                                <input type="number" id="patientAlter" placeholder="Alter" min="0" max="150">
+                                <input type="number" id="patientAlter" placeholder="Alter" min="0" max="150" tabindex="3">
                             </div>
                             <div class="form-group">
                                 <label>Geschlecht</label>
@@ -1384,7 +1850,7 @@
                             </div>
                         </div>
 
-                        <!-- Ort & Kontakt (Angepasst: Gesichtet durch + Ort nebeneinander) -->
+                        <!-- Ort & Kontakt -->
                         <div class="form-row-3">
                             <div class="form-group">
                                 <label class="required">Gesichtet durch</label>
@@ -1422,175 +1888,259 @@
                         <div class="form-row-3">
                             <div class="form-group">
                                 <label class="required">Patientenort / MC</label>
-                                <input list="ort-vorschlaege" id="patientOrt" placeholder="Ort..." required>
-                                <datalist id="ort-vorschlaege">
-                                    <option value="MC 1">
-                                    <option value="MC 2">
-                                    <option value="Stadion Innenraum">
-                                    <option value="Umlauf">
-                                    <option value="Sonstiges">
-                                </datalist>
+                                <select id="patientOrt" required>
+                                    <option value="">-- Wählen --</option>
+                                    <option value="MC 1">MC 1</option>
+                                    <option value="MC 2">MC 2</option>
+                                </select>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group ambulant-hide">
                                 <label>Geburtsdatum</label>
                                 <input type="date" id="patientGeburtsdatum">
                             </div>
-                            <div class="form-group">
-                                <label>Adresse / Kontakt</label>
-                                <input type="text" id="patientAdresse" placeholder="Adresse / Kontaktperson">
+                            <div class="form-group ambulant-hide">
+                                <label>Telefon</label>
+                                <input type="tel" id="patientTelefon" placeholder="Telefonnummer" tabindex="10">
                             </div>
                         </div>
 
-                        <!-- Medizinische Details (werden bei Ambulant ausgeblendet) -->
-                        <div class="medical-deep-data">
-                            <!-- ABCDE Beurteilung -->
-                            <div class="compact-section">
-                                <h4>Beurteilung (ABCDE)</h4>
-                                <div class="form-row-5">
+                        <!-- Adresse -->
+                        <div class="compact-section ambulant-hide">
+                            <div class="compact-section-header">
+                                <span class="header-icon">🏠</span>
+                                <span>Adresse</span>
+                            </div>
+                            <div class="compact-section-body">
+                                <div class="adresse-grid">
                                     <div class="form-group">
-                                        <label>A - Airway</label>
+                                        <label>Straße</label>
+                                        <input type="text" id="patientStrasse" placeholder="Straße" tabindex="11">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Hausnr.</label>
+                                        <input type="text" id="patientHausnummer" placeholder="Nr." tabindex="12">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>PLZ</label>
+                                        <input type="text" id="patientPLZ" placeholder="PLZ" tabindex="13">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ort</label>
+                                        <input type="text" id="patientWohnort" placeholder="Ort" tabindex="14">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Kontaktperson</label>
+                                        <input type="text" id="patientKontaktperson" placeholder="Angehörige" tabindex="15">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ABCDE Beurteilung - NEU GESTALTET -->
+                        <div class="compact-section medical-deep-data">
+                            <div class="compact-section-header">
+                                <span class="header-icon">🩺</span>
+                                <span>ABCDE Beurteilung</span>
+                            </div>
+                            <div class="compact-section-body">
+                                <div class="abcde-grid">
+                                    <div class="abcde-item">
+                                        <div class="abcde-letter a">A</div>
+                                        <div class="abcde-label">Airway</div>
                                         <select id="patientAirway">
                                             <option value="">--</option>
                                             <option value="Frei">Frei</option>
+                                            <option value="Gefährdet">Gefährdet</option>
                                             <option value="Verlegt">Verlegt</option>
-                                            <option value="Intubiert">Intubiert</option>
+                                            <option value="Gesichert (Tubus)">Gesichert (Tubus)</option>
+                                            <option value="Gesichert (SGA)">Gesichert (SGA)</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>B - Breathing</label>
+                                    <div class="abcde-item">
+                                        <div class="abcde-letter b">B</div>
+                                        <div class="abcde-label">Breathing</div>
                                         <select id="patientBreathing">
                                             <option value="">--</option>
-                                            <option value="Normal">Normal</option>
-                                            <option value="Beschleunigt">Schnell</option>
-                                            <option value="Verlangsamt">Langsam</option>
-                                            <option value="Keine">Keine</option>
+                                            <option value="Unauffällig">Unauffällig</option>
+                                            <option value="Tachypnoe">Tachypnoe</option>
+                                            <option value="Bradypnoe">Bradypnoe</option>
+                                            <option value="Dyspnoe">Dyspnoe</option>
+                                            <option value="Apnoe">Apnoe</option>
+                                            <option value="Beatmet">Beatmet</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>C - Circulation</label>
+                                    <div class="abcde-item">
+                                        <div class="abcde-letter c">C</div>
+                                        <div class="abcde-label">Circulation</div>
                                         <select id="patientCirculation">
                                             <option value="">--</option>
                                             <option value="Stabil">Stabil</option>
-                                            <option value="Tachykardie">Tachykard</option>
-                                            <option value="Bradykardie">Bradykard</option>
+                                            <option value="Tachykard">Tachykard</option>
+                                            <option value="Bradykard">Bradykard</option>
+                                            <option value="Hypotonie">Hypotonie</option>
+                                            <option value="Hypertonie">Hypertonie</option>
                                             <option value="Schock">Schock</option>
+                                            <option value="Rekapzeit >2s">Rekapzeit >2s</option>
+                                            <option value="Kreislaufstillstand">Kreislaufstillstand</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>D - Disability</label>
+                                    <div class="abcde-item">
+                                        <div class="abcde-letter d">D</div>
+                                        <div class="abcde-label">Disability</div>
                                         <select id="patientDisability">
                                             <option value="">--</option>
-                                            <option value="Wach">Wach</option>
-                                            <option value="Verwirrt">Verwirrt</option>
-                                            <option value="Bewusstlos">Bewusstlos</option>
+                                            <option value="Wach (Alert)">Wach (Alert)</option>
+                                            <option value="Reagiert auf Ansprache (Voice)">Reagiert auf Ansprache</option>
+                                            <option value="Reagiert auf Schmerz (Pain)">Reagiert auf Schmerz</option>
+                                            <option value="Keine Reaktion (Unresponsive)">Keine Reaktion</option>
+                                            <option value="Orientiert">Orientiert</option>
+                                            <option value="Desorientiert">Desorientiert</option>
+                                            <option value="Krampfanfall">Krampfanfall</option>
                                         </select>
                                     </div>
-                                    <div class="form-group">
-                                        <label>E - Exposure</label>
+                                    <div class="abcde-item">
+                                        <div class="abcde-letter e">E</div>
+                                        <div class="abcde-label">Exposure</div>
                                         <select id="patientExposure">
                                             <option value="">--</option>
-                                            <option value="Normotherm">Normal</option>
-                                            <option value="Hypothermie">Kalt</option>
-                                            <option value="Hyperthermie">Heiß</option>
-                                            <option value="Trauma">Trauma</option>
+                                            <option value="Unauffällig">Unauffällig</option>
+                                            <option value="Hypotherm">Hypotherm</option>
+                                            <option value="Hypertherm/Fieber">Hypertherm/Fieber</option>
+                                            <option value="Hautveränderungen">Hautveränderungen</option>
+                                            <option value="Verletzungen sichtbar">Verletzungen sichtbar</option>
+                                            <option value="Blutung">Blutung</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Vitalwerte -->
-                            <div class="compact-section">
-                                <h4>Vitalwerte</h4>
-                                <div class="form-row-4">
-                                    <div class="form-group">
-                                        <label>BZ (mg/dl)</label>
-                                        <div class="vitalwerte-input">
-                                            <input type="number" id="inputBZ" placeholder="95" min="0" max="999">
-                                            <button type="button" class="btn-add-vital" onclick="addVitalwert('bz')">+</button>
+                        <!-- Vitalwerte - NEU GESTALTET -->
+                        <div class="compact-section medical-deep-data">
+                            <div class="compact-section-header">
+                                <span class="header-icon">💓</span>
+                                <span>Vitalwerte</span>
+                            </div>
+                            <div class="compact-section-body">
+                                <div class="vitalwerte-grid">
+                                    <div class="vitalwert-card">
+                                        <div class="vitalwert-header">BZ (mg/dl)</div>
+                                        <div class="vitalwert-body">
+                                            <div class="vitalwerte-input">
+                                                <input type="number" id="inputBZ" placeholder="95" min="0" max="999">
+                                                <button type="button" class="btn-add-vital" onclick="addVitalwert('bz')">+</button>
+                                            </div>
+                                            <div id="bzHistory" class="vital-history"></div>
                                         </div>
-                                        <div id="bzHistory" class="vital-history"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>RR (sys/dia)</label>
-                                        <div class="vitalwerte-input">
-                                            <input type="number" id="inputRRSys" placeholder="120" min="0" max="300" style="flex: 1;">
-                                            <span>/</span>
-                                            <input type="number" id="inputRRDia" placeholder="80" min="0" max="200" style="flex: 1;">
-                                            <button type="button" class="btn-add-vital" onclick="addVitalwert('rr')">+</button>
+                                    <div class="vitalwert-card">
+                                        <div class="vitalwert-header">RR (sys/dia)</div>
+                                        <div class="vitalwert-body">
+                                            <div class="vitalwerte-input">
+                                                <input type="number" id="inputRRSys" placeholder="120" min="0" max="300" style="flex: 1;">
+                                                <span>/</span>
+                                                <input type="number" id="inputRRDia" placeholder="80" min="0" max="200" style="flex: 1;">
+                                                <button type="button" class="btn-add-vital" onclick="addVitalwert('rr')">+</button>
+                                            </div>
+                                            <div id="rrHistory" class="vital-history"></div>
                                         </div>
-                                        <div id="rrHistory" class="vital-history"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Puls (/min)</label>
-                                        <div class="vitalwerte-input">
-                                            <input type="number" id="inputPuls" placeholder="72" min="0" max="300">
-                                            <button type="button" class="btn-add-vital" onclick="addVitalwert('puls')">+</button>
+                                    <div class="vitalwert-card">
+                                        <div class="vitalwert-header">Puls (/min)</div>
+                                        <div class="vitalwert-body">
+                                            <div class="vitalwerte-input">
+                                                <input type="number" id="inputPuls" placeholder="72" min="0" max="300">
+                                                <button type="button" class="btn-add-vital" onclick="addVitalwert('puls')">+</button>
+                                            </div>
+                                            <div id="pulsHistory" class="vital-history"></div>
                                         </div>
-                                        <div id="pulsHistory" class="vital-history"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label>Temp (°C)</label>
-                                        <div class="vitalwerte-input">
-                                            <input type="number" id="inputTemp" placeholder="37.0" min="30" max="45" step="0.1">
-                                            <button type="button" class="btn-add-vital" onclick="addVitalwert('temp')">+</button>
+                                    <div class="vitalwert-card">
+                                        <div class="vitalwert-header">SpO2 (%)</div>
+                                        <div class="vitalwert-body">
+                                            <div class="vitalwerte-input">
+                                                <input type="number" id="inputSpO2" placeholder="98" min="0" max="100">
+                                                <button type="button" class="btn-add-vital" onclick="addVitalwert('spo2')">+</button>
+                                            </div>
+                                            <div id="spo2History" class="vital-history"></div>
                                         </div>
-                                        <div id="tempHistory" class="vital-history"></div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Verletztenstatus (OPTIMIERT) -->
-                            <div class="compact-section">
-                                <h4>Status / Maßnahmen</h4>
+                        <!-- Status / Maßnahmen - NEU GESTALTET -->
+                        <div class="compact-section medical-deep-data">
+                            <div class="compact-section-header">
+                                <span class="header-icon">⚡</span>
+                                <span>Status / Maßnahmen</span>
+                            </div>
+                            <div class="compact-section-body">
                                 <div class="verletztenstatus-grid">
                                     <button type="button" class="btn-verletztenstatus sauerstoff" onclick="toggleVerletztenstatus('sauerstoff')">
-                                        <span class="icon">💨</span> O2
+                                        <span class="icon">💨</span>
+                                        <span>O2</span>
                                     </button>
                                     <button type="button" class="btn-verletztenstatus monitor" onclick="toggleVerletztenstatus('monitor')">
-                                        <span class="icon">📊</span> Mon
+                                        <span class="icon">📊</span>
+                                        <span>Monitor</span>
                                     </button>
                                     <button type="button" class="btn-verletztenstatus intubiert" onclick="toggleVerletztenstatus('intubiert')">
-                                        <span class="icon">🫁</span> Tubus
+                                        <span class="icon">🫁</span>
+                                        <span>Tubus</span>
                                     </button>
                                     <button type="button" class="btn-verletztenstatus beatmet" onclick="toggleVerletztenstatus('beatmet')">
-                                        <span class="icon">🌬️</span> Beatm.
+                                        <span class="icon">🌬️</span>
+                                        <span>Beatmet</span>
                                     </button>
                                     <button type="button" class="btn-verletztenstatus reanimiert" onclick="toggleVerletztenstatus('reanimiert')">
-                                        <span class="icon">💓</span> REA
+                                        <span class="icon">💓</span>
+                                        <span>REA</span>
                                     </button>
                                 </div>
                                 <input type="hidden" id="patientVerletztenstatus" value="">
                             </div>
+                        </div>
 
-                            <!-- GCS & Schmerz & Augen -->
-                            <div class="form-row-3">
-                                <div class="form-group">
-                                    <label>GCS (3-15)</label>
-                                    <input type="number" id="patientGCS" placeholder="15" min="3" max="15">
-                                </div>
-                                <div class="form-group">
-                                    <label>Schmerz (0-10)</label>
-                                    <input type="number" id="patientSchmerzskala" placeholder="0" min="0" max="10">
-                                </div>
-                                <div class="form-group">
-                                    <label>Augen</label>
-                                    <select id="patientAugen">
-                                        <option value="">--</option>
-                                        <option value="offen">Offen</option>
-                                        <option value="geschlossen">Zu</option>
-                                    </select>
+                        <!-- GCS, Schmerz, Pupillen -->
+                        <div class="compact-section medical-deep-data">
+                            <div class="compact-section-header">
+                                <span class="header-icon">🧠</span>
+                                <span>Neurologische Beurteilung</span>
+                            </div>
+                            <div class="compact-section-body">
+                                <div class="form-row-3">
+                                    <div class="form-group">
+                                        <label>GCS (3-15)</label>
+                                        <input type="number" id="patientGCS" placeholder="15" min="3" max="15">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Schmerz (0-10)</label>
+                                        <input type="number" id="patientSchmerzskala" placeholder="0" min="0" max="10">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Pupillen</label>
+                                        <select id="patientPupillen">
+                                            <option value="">--</option>
+                                            <option value="Isokor, lichtreagibel">Isokor, lichtreagibel</option>
+                                            <option value="Anisokor">Anisokor</option>
+                                            <option value="Weit, nicht reagibel">Weit, nicht reagibel</option>
+                                            <option value="Eng, reagibel">Eng, reagibel</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-row">
+                        <!-- Verletzung & Allergien -->
+                        <div class="form-row ambulant-hide-extra">
                             <div class="form-group">
                                 <label>Verletzung</label>
-                                <textarea id="patientVerletzungsbereich" placeholder="Verletzungsbereich..." style="min-height: 40px;"></textarea>
+                                <textarea id="patientVerletzungsbereich" placeholder="Verletzungsbereich..." class="equal-textarea"></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Allergien</label>
-                                <input type="text" id="patientAllergien" placeholder="Allergien...">
+                                <textarea id="patientAllergien" placeholder="Allergien..." class="equal-textarea"></textarea>
                             </div>
                         </div>
 
@@ -1599,8 +2149,8 @@
                             <textarea id="patientDiagnose" placeholder="Diagnose..." required style="min-height: 100px;"></textarea>
                         </div>
 
-                        <!-- Transportziel & Ressource (Ausgeblendet bei Ambulant) -->
-                        <div class="form-row medical-deep-data">
+                        <!-- Transportziel & Ressource - NUR für Einsatzleitung/FüAss -->
+                        <div class="form-row medical-deep-data transport-section">
                             <div class="form-group">
                                 <label>Zielort</label>
                                 <input type="text" id="patientTransportziel" placeholder="z.B. Klinikum">
@@ -1622,12 +2172,15 @@
             </div>
 
             <div class="form-section" style="margin-top: 20px;">
-                <h3 style="margin-bottom: 15px; font-size: 18px; font-weight: 400;">
-                    Patienten-Übersicht 
-                    <span style="color: var(--text-secondary); font-size: 14px; font-weight: 300;">
-                        (Total: <span id="patientCount">0</span>)
-                    </span>
-                </h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <h3 style="font-size: 18px; font-weight: 400;">
+                        Patienten-Übersicht 
+                        <span style="color: var(--text-secondary); font-size: 14px; font-weight: 300;">
+                            (Total: <span id="patientCount">0</span>)
+                        </span>
+                    </h3>
+                    <button class="btn-export csv" onclick="exportPatientenCSV()">📥 Patienten CSV</button>
+                </div>
 
                 <div class="patient-filter-tabs">
                     <button class="patient-filter-tab active" onclick="filterPatients('alle')">Alle</button>
@@ -1640,6 +2193,18 @@
 
                 <div id="patientsContainer" class="patients-grid">
                     <div class="empty-state">Noch keine Patienten aufgenommen</div>
+                </div>
+            </div>
+
+            <!-- Meldungsfenster für MC Ansicht (nur lesen) -->
+            <div id="mcLogSection" class="log-section readonly hidden">
+                <div class="log-header">
+                    <div class="log-header-top">
+                        <h2 class="log-title">Meldungen</h2>
+                    </div>
+                </div>
+                <div id="mcLogEntries">
+                    <div class="empty-state">Noch keine Einträge vorhanden</div>
                 </div>
             </div>
         </div>
@@ -1672,6 +2237,40 @@
         </div>
     </div>
 
+    <!-- Einsatz beenden Modal -->
+    <div id="endMissionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Einsatz beenden</h3>
+                <button class="modal-close" onclick="closeEndMissionModal()">&times;</button>
+            </div>
+            <div class="modal-warning">
+                <div class="icon">⚠️</div>
+                <strong>Achtung!</strong><br>
+                Der Einsatz wird für alle Benutzer beendet.
+            </div>
+            <p style="margin-bottom: 15px; text-align: center;">
+                Bitte laden Sie die CSV-Dateien herunter, bevor Sie den Einsatz beenden:
+            </p>
+            
+            <div class="modal-export-buttons">
+                <button class="btn-modal-export" onclick="exportMeldungenCSV()">
+                    <span class="icon">📋</span>
+                    <span>Meldungen CSV</span>
+                </button>
+                <button class="btn-modal-export" onclick="exportPatientenCSV()">
+                    <span class="icon">🏥</span>
+                    <span>Patienten CSV</span>
+                </button>
+            </div>
+
+            <div class="button-row" style="justify-content: center; margin-top: 25px;">
+                <button class="btn-send" onclick="endMission()">🛑 Einsatz beenden & Daten löschen</button>
+                <button class="btn-clear" onclick="closeEndMissionModal()">Abbrechen</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         let entryCounter = 0;
         let patientCounter = 0;
@@ -1687,13 +2286,15 @@
         let currentPatientFilter = 'alle';
         let editingPatientId = null;
         let isAmbulantEntry = false;
+        let currentUserFunction = null;
+        let isMCView = false;
 
         // Vitalwerte Storage
         let currentVitalwerte = {
             bz: [],
             rr: [],
             puls: [],
-            temp: []
+            spo2: []
         };
 
         const statusTexts = {
@@ -1712,14 +2313,103 @@
             'Sonstiges': '🚙'
         };
 
-        const sichtungTexts = {
-            'SK1': 'Rot - Akute Lebensgefahr',
-            'SK2': 'Gelb - Schwer verletzt',
-            'SK3': 'Grün - Leicht verletzt'
-        };
+        // Login-Funktion
+        function login(funktion) {
+            currentUserFunction = funktion;
+            isMCView = (funktion === 'MC 1' || funktion === 'MC 2');
+            
+            document.getElementById('loginScreen').classList.add('hidden');
+            document.getElementById('mainApp').style.display = 'block';
+            document.getElementById('currentUserFunction').textContent = funktion;
+            document.getElementById('funktion').value = funktion;
+            
+            applyViewRestrictions();
+        }
+
+        function logout() {
+            currentUserFunction = null;
+            isMCView = false;
+            document.getElementById('loginScreen').classList.remove('hidden');
+            document.getElementById('mainApp').style.display = 'none';
+        }
+
+        function applyViewRestrictions() {
+            // Einsatz beenden Button nur für Einsatzleitung
+            if (currentUserFunction === 'Einsatzleitung') {
+                document.getElementById('btnEndMission').classList.remove('hidden');
+            } else {
+                document.getElementById('btnEndMission').classList.add('hidden');
+            }
+
+            // Transport-Sektion nur für Einsatzleitung/Führungsassistent
+            if (isMCView) {
+                document.querySelectorAll('.transport-section').forEach(el => el.classList.add('hidden'));
+            } else {
+                document.querySelectorAll('.transport-section').forEach(el => el.classList.remove('hidden'));
+            }
+
+            if (isMCView) {
+                // MC1/MC2: Nur Patienten-Tab sichtbar
+                document.getElementById('tabMeldungen').classList.add('hidden');
+                document.getElementById('tabRessourcen').classList.add('hidden');
+                
+                // Direkt zum Patienten-Tab wechseln
+                document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+                document.getElementById('tabPatienten').classList.add('active');
+                document.getElementById('tab-patienten').classList.add('active');
+                
+                // Meldungsfenster nur lesen anzeigen
+                document.getElementById('mcLogSection').classList.remove('hidden');
+                
+                // MC kann Patienten anlegen
+                document.getElementById('patientActionsRow').classList.remove('hidden');
+            } else {
+                // Einsatzleitung / Führungsassistent: Vollzugriff
+                document.getElementById('tabMeldungen').classList.remove('hidden');
+                document.getElementById('tabRessourcen').classList.remove('hidden');
+                document.getElementById('mcLogSection').classList.add('hidden');
+                document.getElementById('patientActionsRow').classList.remove('hidden');
+            }
+        }
+
+        // Einsatz beenden Modal
+        function openEndMissionModal() {
+            document.getElementById('endMissionModal').classList.add('active');
+        }
+
+        function closeEndMissionModal() {
+            document.getElementById('endMissionModal').classList.remove('active');
+        }
+
+        function endMission() {
+            // Alle Daten löschen
+            entryCounter = 0;
+            patientCounter = 0;
+            entries.length = 0;
+            patients.length = 0;
+            resources.length = 0;
+            absenderSet.clear();
+            fahrzeugSet.clear();
+            
+            // UI aktualisieren
+            renderEntries();
+            renderPatients();
+            renderResources();
+            updateAbsenderFilter();
+            updateFahrzeugFilter();
+            
+            closeEndMissionModal();
+            alert('Einsatz wurde beendet. Alle Daten wurden gelöscht.');
+            
+            // Zurück zum Login
+            logout();
+        }
 
         // Tab-Wechsel
         function switchTab(tabName) {
+            if (isMCView && tabName !== 'patienten') return;
+            
             document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
             
@@ -1736,23 +2426,32 @@
                 container.classList.remove('hidden');
                 btns.classList.add('hidden');
                 
-                // Modus setzen
                 isAmbulantEntry = (mode === 'ambulant');
                 document.getElementById('isAmbulantMode').value = isAmbulantEntry;
 
                 if (isAmbulantEntry) {
                     document.querySelectorAll('.medical-deep-data').forEach(el => el.classList.add('hidden'));
+                    document.querySelectorAll('.ambulant-hide').forEach(el => el.classList.add('hidden'));
+                    document.querySelectorAll('.ambulant-hide-extra').forEach(el => el.classList.add('hidden'));
+                    document.getElementById('sichtungGroup').classList.add('hidden');
                     document.getElementById('formTitle').textContent = 'Ambulante Versorgung aufnehmen';
                 } else {
                     document.querySelectorAll('.medical-deep-data').forEach(el => el.classList.remove('hidden'));
+                    document.querySelectorAll('.ambulant-hide').forEach(el => el.classList.remove('hidden'));
+                    document.querySelectorAll('.ambulant-hide-extra').forEach(el => el.classList.remove('hidden'));
+                    document.getElementById('sichtungGroup').classList.remove('hidden');
                     document.getElementById('formTitle').textContent = 'Neuen Patienten aufnehmen';
+                    
+                    // Transport-Sektion für MC ausblenden
+                    if (isMCView) {
+                        document.querySelectorAll('.transport-section').forEach(el => el.classList.add('hidden'));
+                    }
                 }
 
                 if (!editingPatientId) {
                     clearPatientForm(false);
                 }
                 
-                // Update Resources Dropdown when opening form
                 updateResourceDropdown();
             } else {
                 container.classList.add('hidden');
@@ -1761,7 +2460,7 @@
             }
         }
 
-        // Automatische Altersberechnung
+        // Altersberechnung
         document.getElementById('patientGeburtsdatum').addEventListener('change', function() {
             const dobValue = this.value;
             if (!dobValue) {
@@ -1786,7 +2485,7 @@
         // Kategorie auswählen
         function selectKategorie(kategorie) {
             document.querySelectorAll('.btn-kategorie').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            event.target.closest('.btn-kategorie').classList.add('active');
             selectedKategorie = kategorie;
             document.getElementById('patientKategorie').value = kategorie;
         }
@@ -1794,7 +2493,7 @@
         // Sichtung auswählen
         function selectSichtung(category) {
             document.querySelectorAll('.btn-sichtung-compact').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            event.target.closest('.btn-sichtung-compact').classList.add('active');
             selectedSichtung = category;
             document.getElementById('patientSichtung').value = category;
         }
@@ -1825,13 +2524,12 @@
         // Vitalwerte hinzufügen
         function addVitalwert(type) {
             const now = new Date().toLocaleTimeString('de-DE', {hour: '2-digit', minute: '2-digit'});
-            let value, displayValue;
+            let value;
 
             switch(type) {
                 case 'bz':
                     value = document.getElementById('inputBZ').value;
                     if (!value) return;
-                    displayValue = `${value} mg/dl`;
                     currentVitalwerte.bz.push({time: now, value: parseFloat(value)});
                     document.getElementById('inputBZ').value = '';
                     renderVitalHistory('bz', 'bzHistory', 'mg/dl');
@@ -1840,7 +2538,6 @@
                     const sys = document.getElementById('inputRRSys').value;
                     const dia = document.getElementById('inputRRDia').value;
                     if (!sys || !dia) return;
-                    displayValue = `${sys}/${dia} mmHg`;
                     currentVitalwerte.rr.push({time: now, sys: parseFloat(sys), dia: parseFloat(dia)});
                     document.getElementById('inputRRSys').value = '';
                     document.getElementById('inputRRDia').value = '';
@@ -1849,18 +2546,16 @@
                 case 'puls':
                     value = document.getElementById('inputPuls').value;
                     if (!value) return;
-                    displayValue = `${value} /min`;
                     currentVitalwerte.puls.push({time: now, value: parseFloat(value)});
                     document.getElementById('inputPuls').value = '';
                     renderVitalHistory('puls', 'pulsHistory', '/min');
                     break;
-                case 'temp':
-                    value = document.getElementById('inputTemp').value;
+                case 'spo2':
+                    value = document.getElementById('inputSpO2').value;
                     if (!value) return;
-                    displayValue = `${value} °C`;
-                    currentVitalwerte.temp.push({time: now, value: parseFloat(value)});
-                    document.getElementById('inputTemp').value = '';
-                    renderVitalHistory('temp', 'tempHistory', '°C');
+                    currentVitalwerte.spo2.push({time: now, value: parseFloat(value)});
+                    document.getElementById('inputSpO2').value = '';
+                    renderVitalHistory('spo2', 'spo2History', '%');
                     break;
             }
         }
@@ -1896,8 +2591,8 @@
 
         function deleteVitalwert(type, index) {
             currentVitalwerte[type].splice(index, 1);
-            const containerMap = { 'bz': 'bzHistory', 'rr': 'rrHistory', 'puls': 'pulsHistory', 'temp': 'tempHistory' };
-            const unitMap = { 'bz': 'mg/dl', 'rr': 'mmHg', 'puls': '/min', 'temp': '°C' };
+            const containerMap = { 'bz': 'bzHistory', 'rr': 'rrHistory', 'puls': 'pulsHistory', 'spo2': 'spo2History' };
+            const unitMap = { 'bz': 'mg/dl', 'rr': 'mmHg', 'puls': '/min', 'spo2': '%' };
             renderVitalHistory(type, containerMap[type], unitMap[type]);
         }
 
@@ -1923,16 +2618,15 @@
 
             patientCounter++;
             
-            const sichtung = document.getElementById('patientSichtung').value;
+            const sichtung = isAmbulantEntry ? 'SK3' : document.getElementById('patientSichtung').value;
             const gesichtetDurch = document.getElementById('patientGesichtetDurch').value;
             const kategorie = document.getElementById('patientKategorie').value;
             
-            // Ressourcenzuweisung (nur wenn nicht ambulant)
             let assignedResourceName = null;
             let transportInfo = null;
             let isTransported = false;
 
-            if (!isAmbulantEntry) {
+            if (!isAmbulantEntry && !isMCView) {
                 assignedResourceName = document.getElementById('patientTransportResource').value;
                 if (assignedResourceName) {
                     const resource = resources.find(r => r.name === assignedResourceName);
@@ -1948,6 +2642,13 @@
                 }
             }
 
+            // Adresse zusammenbauen
+            const strasse = document.getElementById('patientStrasse').value;
+            const hausnummer = document.getElementById('patientHausnummer').value;
+            const plz = document.getElementById('patientPLZ').value;
+            const wohnort = document.getElementById('patientWohnort').value;
+            const adresseComplete = [strasse, hausnummer, plz, wohnort].filter(Boolean).join(', ');
+
             const patient = {
                 id: Date.now(),
                 nummer: patientCounter,
@@ -1959,29 +2660,33 @@
                 abschnitt: document.getElementById('patientAbschnitt').value,
                 nachname: nachname,
                 vorname: document.getElementById('patientVorname').value || '',
-                alter: document.getElementById('patientAlter').value,
-                geburtsdatum: document.getElementById('patientGeburtsdatum').value,
+                alter: isAmbulantEntry ? '' : document.getElementById('patientAlter').value,
+                geburtsdatum: isAmbulantEntry ? '' : document.getElementById('patientGeburtsdatum').value,
                 geschlecht: document.getElementById('patientGeschlecht').value,
-                adresse: document.getElementById('patientAdresse').value,
-                allergien: document.getElementById('patientAllergien').value,
-                // Bei Ambulant leere Werte für medizinische Details
+                telefon: isAmbulantEntry ? '' : document.getElementById('patientTelefon').value,
+                strasse: isAmbulantEntry ? '' : strasse,
+                hausnummer: isAmbulantEntry ? '' : hausnummer,
+                plz: isAmbulantEntry ? '' : plz,
+                wohnort: isAmbulantEntry ? '' : wohnort,
+                adresse: isAmbulantEntry ? '' : adresseComplete,
+                kontaktperson: isAmbulantEntry ? '' : document.getElementById('patientKontaktperson').value,
+                allergien: isAmbulantEntry ? '' : document.getElementById('patientAllergien').value,
                 airway: isAmbulantEntry ? '' : document.getElementById('patientAirway').value,
                 breathing: isAmbulantEntry ? '' : document.getElementById('patientBreathing').value,
                 circulation: isAmbulantEntry ? '' : document.getElementById('patientCirculation').value,
                 disability: isAmbulantEntry ? '' : document.getElementById('patientDisability').value,
                 exposure: isAmbulantEntry ? '' : document.getElementById('patientExposure').value,
-                verletzungsbereich: document.getElementById('patientVerletzungsbereich').value,
+                verletzungsbereich: isAmbulantEntry ? '' : document.getElementById('patientVerletzungsbereich').value,
                 verletztenstatus: isAmbulantEntry ? [] : selectedVerletztenstatus.slice(),
                 gcs: isAmbulantEntry ? '' : document.getElementById('patientGCS').value,
                 schmerzskala: isAmbulantEntry ? '' : document.getElementById('patientSchmerzskala').value,
-                augen: isAmbulantEntry ? '' : document.getElementById('patientAugen').value,
+                pupillen: isAmbulantEntry ? '' : document.getElementById('patientPupillen').value,
                 diagnose: diagnose,
                 transportziel: isAmbulantEntry ? '' : document.getElementById('patientTransportziel').value,
-                vitalwerte: isAmbulantEntry ? {bz:[], rr:[], puls:[], temp:[]} : JSON.parse(JSON.stringify(currentVitalwerte)),
+                vitalwerte: isAmbulantEntry ? {bz:[], rr:[], puls:[], spo2:[]} : JSON.parse(JSON.stringify(currentVitalwerte)),
                 aufnahmezeit: new Date().toLocaleString('de-DE'),
                 transport: transportInfo,
                 transportiert: isTransported,
-                // Ambulant = sofort entlassen
                 entlassen: isAmbulantEntry,
                 entlassungzeit: isAmbulantEntry ? new Date().toLocaleString('de-DE') : null,
                 isAmbulant: isAmbulantEntry
@@ -1989,7 +2694,6 @@
             
             patients.push(patient);
             
-            // Protokolleintrag
             const entry = {
                 id: ++entryCounter,
                 date: new Date().toLocaleDateString('de-DE'),
@@ -1998,6 +2702,7 @@
                 artMeldung: 'Patientenaufnahme',
                 vorrangstufe: 'Einfach',
                 absender: gesichtetDurch,
+                funktion: currentUserFunction,
                 fahrzeug: assignedResourceName || null,
                 sichtung: sichtung,
                 meldung: `Patient #${patientCounter} aufgenommen (${isAmbulantEntry ? 'Ambulant' : 'Regulär'}) - ${kategorie} - ${sichtung} - ${patient.abschnitt} - ${patient.sichtungsort} - Ort: ${patientOrt}${assignedResourceName ? ' - Ressource ' + assignedResourceName + ' zugewiesen' : ''}`
@@ -2012,6 +2717,7 @@
             
             renderPatients();
             renderEntries();
+            renderMCLog();
             togglePatientForm(false);
         }
 
@@ -2021,7 +2727,6 @@
 
             editingPatientId = patientId;
             
-            // Modus bestimmen
             const mode = patient.isAmbulant ? 'ambulant' : 'standard';
             togglePatientForm(true, mode);
             
@@ -2029,18 +2734,17 @@
             document.getElementById('submitPatientBtn').textContent = 'Änderungen speichern';
             document.getElementById('editPatientId').value = patientId;
 
-            // Felder befüllen
             document.getElementById('patientKategorie').value = patient.kategorie;
-            selectKategorie(patient.kategorie);
             document.querySelectorAll('.btn-kategorie').forEach(btn => {
-                if (btn.textContent === patient.kategorie) btn.classList.add('active');
+                if (btn.textContent.includes(patient.kategorie)) btn.classList.add('active');
             });
 
-            document.getElementById('patientSichtung').value = patient.sichtung;
-            selectSichtung(patient.sichtung);
-            document.querySelectorAll('.btn-sichtung-compact').forEach(btn => {
-                if (btn.textContent.includes(patient.sichtung)) btn.classList.add('active');
-            });
+            if (!patient.isAmbulant) {
+                document.getElementById('patientSichtung').value = patient.sichtung;
+                document.querySelectorAll('.btn-sichtung-compact').forEach(btn => {
+                    if (btn.textContent.includes(patient.sichtung)) btn.classList.add('active');
+                });
+            }
 
             document.getElementById('patientGesichtetDurch').value = patient.gesichtetDurch;
             document.getElementById('patientOrt').value = patient.patientOrt;
@@ -2048,21 +2752,28 @@
             document.getElementById('patientAbschnitt').value = patient.abschnitt;
             document.getElementById('patientNachname').value = patient.nachname;
             document.getElementById('patientVorname').value = patient.vorname;
-            document.getElementById('patientAlter').value = patient.alter;
-            document.getElementById('patientGeburtsdatum').value = patient.geburtsdatum;
+            
+            if (!patient.isAmbulant) {
+                document.getElementById('patientAlter').value = patient.alter;
+                document.getElementById('patientGeburtsdatum').value = patient.geburtsdatum;
+                document.getElementById('patientTelefon').value = patient.telefon || '';
+                document.getElementById('patientStrasse').value = patient.strasse || '';
+                document.getElementById('patientHausnummer').value = patient.hausnummer || '';
+                document.getElementById('patientPLZ').value = patient.plz || '';
+                document.getElementById('patientWohnort').value = patient.wohnort || '';
+                document.getElementById('patientKontaktperson').value = patient.kontaktperson || '';
+                document.getElementById('patientAllergien').value = patient.allergien || '';
+                document.getElementById('patientVerletzungsbereich').value = patient.verletzungsbereich;
+            }
             
             if (patient.geschlecht) {
                 document.getElementById('patientGeschlecht').value = patient.geschlecht;
-                selectGender(patient.geschlecht);
                 document.querySelectorAll('.btn-gender').forEach(btn => {
                     const genderMap = {'👨': 'männlich', '👩': 'weiblich', '⚧': 'divers'};
                     if (genderMap[btn.textContent] === patient.geschlecht) btn.classList.add('active');
                 });
             }
 
-            document.getElementById('patientAdresse').value = patient.adresse;
-            document.getElementById('patientAllergien').value = patient.allergien || '';
-            document.getElementById('patientVerletzungsbereich').value = patient.verletzungsbereich;
             document.getElementById('patientDiagnose').value = patient.diagnose;
 
             if (!patient.isAmbulant) {
@@ -2073,7 +2784,7 @@
                 document.getElementById('patientExposure').value = patient.exposure;
                 document.getElementById('patientGCS').value = patient.gcs;
                 document.getElementById('patientSchmerzskala').value = patient.schmerzskala;
-                document.getElementById('patientAugen').value = patient.augen;
+                document.getElementById('patientPupillen').value = patient.pupillen;
                 document.getElementById('patientTransportziel').value = patient.transportziel;
 
                 selectedVerletztenstatus = [...patient.verletztenstatus];
@@ -2087,7 +2798,7 @@
                 renderVitalHistory('bz', 'bzHistory', 'mg/dl');
                 renderVitalHistory('rr', 'rrHistory', 'mmHg');
                 renderVitalHistory('puls', 'pulsHistory', '/min');
-                renderVitalHistory('temp', 'tempHistory', '°C');
+                renderVitalHistory('spo2', 'spo2History', '%');
             }
 
             document.getElementById('patientFormContainer').scrollIntoView({ behavior: 'smooth' });
@@ -2107,22 +2818,30 @@
             }
 
             patient.kategorie = document.getElementById('patientKategorie').value;
-            patient.sichtung = document.getElementById('patientSichtung').value;
+            if (!patient.isAmbulant) {
+                patient.sichtung = document.getElementById('patientSichtung').value;
+            }
             patient.gesichtetDurch = document.getElementById('patientGesichtetDurch').value;
             patient.patientOrt = patientOrt;
             patient.sichtungsort = document.getElementById('patientSichtungsort').value;
             patient.abschnitt = document.getElementById('patientAbschnitt').value;
             patient.nachname = nachname;
             patient.vorname = document.getElementById('patientVorname').value || '';
-            patient.alter = document.getElementById('patientAlter').value;
-            patient.geburtsdatum = document.getElementById('patientGeburtsdatum').value;
             patient.geschlecht = document.getElementById('patientGeschlecht').value;
-            patient.adresse = document.getElementById('patientAdresse').value;
-            patient.allergien = document.getElementById('patientAllergien').value;
-            patient.verletzungsbereich = document.getElementById('patientVerletzungsbereich').value;
             patient.diagnose = diagnose;
 
             if (!patient.isAmbulant) {
+                patient.alter = document.getElementById('patientAlter').value;
+                patient.geburtsdatum = document.getElementById('patientGeburtsdatum').value;
+                patient.telefon = document.getElementById('patientTelefon').value;
+                patient.strasse = document.getElementById('patientStrasse').value;
+                patient.hausnummer = document.getElementById('patientHausnummer').value;
+                patient.plz = document.getElementById('patientPLZ').value;
+                patient.wohnort = document.getElementById('patientWohnort').value;
+                patient.kontaktperson = document.getElementById('patientKontaktperson').value;
+                patient.adresse = [patient.strasse, patient.hausnummer, patient.plz, patient.wohnort].filter(Boolean).join(', ');
+                patient.allergien = document.getElementById('patientAllergien').value;
+                patient.verletzungsbereich = document.getElementById('patientVerletzungsbereich').value;
                 patient.airway = document.getElementById('patientAirway').value;
                 patient.breathing = document.getElementById('patientBreathing').value;
                 patient.circulation = document.getElementById('patientCirculation').value;
@@ -2131,7 +2850,7 @@
                 patient.verletztenstatus = selectedVerletztenstatus.slice();
                 patient.gcs = document.getElementById('patientGCS').value;
                 patient.schmerzskala = document.getElementById('patientSchmerzskala').value;
-                patient.augen = document.getElementById('patientAugen').value;
+                patient.pupillen = document.getElementById('patientPupillen').value;
                 patient.transportziel = document.getElementById('patientTransportziel').value;
                 patient.vitalwerte = JSON.parse(JSON.stringify(currentVitalwerte));
             }
@@ -2144,6 +2863,7 @@
                 artMeldung: 'Maßnahme',
                 vorrangstufe: 'Einfach',
                 absender: patient.gesichtetDurch,
+                funktion: currentUserFunction,
                 fahrzeug: null,
                 sichtung: patient.sichtung,
                 meldung: `Patient #${patient.nummer} (${patient.nachname}) wurde aktualisiert`
@@ -2153,6 +2873,7 @@
 
             renderPatients();
             renderEntries();
+            renderMCLog();
             togglePatientForm(false);
         }
 
@@ -2172,11 +2893,11 @@
             selectedVerletztenstatus = [];
             selectedKategorie = null;
 
-            currentVitalwerte = { bz: [], rr: [], puls: [], temp: [] };
+            currentVitalwerte = { bz: [], rr: [], puls: [], spo2: [] };
             document.getElementById('bzHistory').innerHTML = '';
             document.getElementById('rrHistory').innerHTML = '';
             document.getElementById('pulsHistory').innerHTML = '';
-            document.getElementById('tempHistory').innerHTML = '';
+            document.getElementById('spo2History').innerHTML = '';
         }
 
         function filterPatients(filter) {
@@ -2209,6 +2930,9 @@
                 return;
             }
             
+            // Transport-Button nur für Einsatzleitung/Führungsassistent anzeigen
+            const showTransportButton = !isMCView;
+            
             container.innerHTML = filteredPatients.map(patient => {
                 const skClass = patient.sichtung.toLowerCase();
                 const displayName = patient.vorname ? `${patient.vorname} ${patient.nachname}` : patient.nachname;
@@ -2237,9 +2961,10 @@
                             <span class="patient-compact-value">${patient.diagnose}</span>
                         </div>
 
-                        ${!patient.entlassen && !patient.isAmbulant && !patient.transportiert ? `
-                            <button class="btn-edit-patient" onclick="event.stopPropagation(); openTransportModal(${patient.id})">
-                                🚑 Transport
+                        ${!patient.entlassen && !patient.isAmbulant && !patient.transportiert && showTransportButton ? `
+                            <button class="btn-transport" onclick="event.stopPropagation(); openTransportModal(${patient.id})">
+                                <span class="icon">🚑</span>
+                                <span>Transport</span>
                             </button>
                         ` : ''}
                         
@@ -2268,6 +2993,7 @@
                 artMeldung: 'Entlassung',
                 vorrangstufe: 'Einfach',
                 absender: patient.gesichtetDurch,
+                funktion: currentUserFunction,
                 fahrzeug: null,
                 sichtung: patient.sichtung,
                 meldung: `Patient #${patient.nummer} (${patient.nachname}) wurde entlassen`
@@ -2276,6 +3002,7 @@
             entries.unshift(entry);
             renderPatients();
             renderEntries();
+            renderMCLog();
         }
 
         function openTransportModal(patientId) {
@@ -2288,7 +3015,6 @@
             const select = document.getElementById('transportFahrzeug');
             select.innerHTML = '<option value="">-- Auswählen --</option>';
             
-            // Nur Ressourcen mit Status 1 anzeigen
             resources.forEach(resource => {
                 if (resource.status === '1') {
                     select.innerHTML += `<option value="${resource.name}">${resource.name} (${resource.type})</option>`;
@@ -2324,6 +3050,7 @@
                 artMeldung: 'Transport',
                 vorrangstufe: 'Einfach',
                 absender: patient.gesichtetDurch,
+                funktion: currentUserFunction,
                 fahrzeug: fahrzeug,
                 sichtung: patient.sichtung,
                 meldung: `Patient #${patient.nummer} (${patient.nachname}) wird mit ${fahrzeug} nach ${zielklinik} transportiert`
@@ -2341,6 +3068,7 @@
             
             renderPatients();
             renderEntries();
+            renderMCLog();
             closeTransportModal();
         });
 
@@ -2370,7 +3098,6 @@
             const currentValue = select.value;
             select.innerHTML = '<option value="">-- Keine Zuweisung --</option>';
             resources.forEach(resource => {
-                // Nur Ressourcen mit Status 1 anzeigen
                 if (resource.status === '1') {
                     select.innerHTML += `<option value="${resource.name}">${resource.name} (${resource.type})</option>`;
                 }
@@ -2396,6 +3123,7 @@
                 artMeldung: 'Funkspruch',
                 vorrangstufe: 'Einfach',
                 absender: absender,
+                funktion: currentUserFunction,
                 fahrzeug: resource.name,
                 meldung: `${resource.name} Status ${status} - ${statusText}`
             };
@@ -2406,7 +3134,8 @@
             
             renderResources();
             renderEntries();
-            updateResourceDropdown(); // Update dropdown when status changes
+            renderMCLog();
+            updateResourceDropdown();
         }
 
         function renderResources() {
@@ -2452,12 +3181,14 @@
                 artMeldung: document.getElementById('artMeldung').value,
                 vorrangstufe: document.getElementById('vorrangstufe').value,
                 absender: absender,
+                funktion: currentUserFunction,
                 fahrzeug: null,
                 meldung: document.getElementById('meldung').value
             };
             entries.unshift(entry);
             if (!absenderSet.has(absender)) { absenderSet.add(absender); updateAbsenderFilter(); }
             renderEntries();
+            renderMCLog();
             clearForm();
         }
 
@@ -2499,11 +3230,24 @@
                 if (isPatientEntry && hasSichtung) classes += ` patient-entry ${entry.sichtung.toLowerCase()}`;
                 if (isEntlassenEntry) classes += ' entlassen-entry';
                 
-                return `<div class="${classes}" data-art="${entry.artMeldung}" data-vorrang="${entry.vorrangstufe}" data-absender="${entry.absender}" data-fahrzeug="${entry.fahrzeug || ''}"><div class="log-meta"><span class="log-number">#${String(entry.id).padStart(3, '0')}</span><span class="log-time">${entry.date} ${entry.time}</span><span>${entry.artMeldung}</span><span class="priority-badge priority-${priorityClass}">${entry.vorrangstufe}</span>${hasSichtung ? `<span class="sichtung-badge ${entry.sichtung.toLowerCase()}">${entry.sichtung}</span>` : ''}</div><div class="log-content"><div class="log-label">Absender:</div><div class="log-value">${entry.absender}</div></div><div class="log-message"><div class="log-label">Meldung:</div><div class="log-value">${entry.meldung}</div></div></div>`;
+                return `<div class="${classes}" data-art="${entry.artMeldung}" data-vorrang="${entry.vorrangstufe}" data-absender="${entry.absender}" data-fahrzeug="${entry.fahrzeug || ''}"><div class="log-meta"><span class="log-number">#${String(entry.id).padStart(3, '0')}</span><span class="log-time">${entry.date} ${entry.time}</span><span>${entry.artMeldung}</span>${entry.funktion ? `<span class="log-function">[${entry.funktion}]</span>` : ''}<span class="priority-badge priority-${priorityClass}">${entry.vorrangstufe}</span>${hasSichtung ? `<span class="sichtung-badge ${entry.sichtung.toLowerCase()}">${entry.sichtung}</span>` : ''}</div><div class="log-content"><div class="log-label">Absender:</div><div class="log-value">${entry.absender}</div></div><div class="log-message"><div class="log-label">Meldung:</div><div class="log-value">${entry.meldung}</div></div></div>`;
             }).join('');
             document.getElementById('totalCount').textContent = entries.length;
             updateFahrzeugFilter();
             applyFilters();
+        }
+
+        // MC Log (nur lesen)
+        function renderMCLog() {
+            const container = document.getElementById('mcLogEntries');
+            if (entries.length === 0) {
+                container.innerHTML = '<div class="empty-state">Noch keine Einträge vorhanden</div>';
+                return;
+            }
+            container.innerHTML = entries.slice(0, 20).map(entry => {
+                const priorityClass = entry.vorrangstufe.toLowerCase();
+                return `<div class="log-entry ${priorityClass !== 'einfach' ? 'priority-' + priorityClass : ''}"><div class="log-meta"><span class="log-number">#${String(entry.id).padStart(3, '0')}</span><span class="log-time">${entry.date} ${entry.time}</span><span>${entry.artMeldung}</span>${entry.funktion ? `<span class="log-function">[${entry.funktion}]</span>` : ''}</div><div class="log-message"><div class="log-value">${entry.meldung}</div></div></div>`;
+            }).join('');
         }
 
         function applyFilters() {
@@ -2512,7 +3256,7 @@
             const filterAbsender = document.getElementById('filterAbsender').value;
             const filterFahrzeug = document.getElementById('filterFahrzeug').value;
             
-            const allEntries = document.querySelectorAll('.log-entry');
+            const allEntries = document.querySelectorAll('#logEntries .log-entry');
             let visibleCount = 0;
             
             allEntries.forEach(entry => {
@@ -2550,27 +3294,90 @@
             document.getElementById('artMeldung').value = 'Funkspruch';
             document.getElementById('vorrangstufe').value = 'Einfach';
             document.getElementById('absender').value = 'FüASs';
+            document.getElementById('funktion').value = currentUserFunction || '';
         }
 
-        function exportToJSON() {
-            if (entries.length === 0 && resources.length === 0 && patients.length === 0) { alert('Keine Daten zum Exportieren vorhanden'); return; }
-            const exportData = { entries: entries, resources: resources, patients: patients, exportDate: new Date().toISOString() };
-            const dataStr = JSON.stringify(exportData, null, 2);
-            const dataBlob = new Blob([dataStr], {type: 'application/json'});
+        // CSV Export für Meldungen
+        function exportMeldungenCSV() {
+            if (entries.length === 0) { 
+                alert('Keine Meldungen zum Exportieren vorhanden'); 
+                return; 
+            }
+            
+            const headers = ['Nummer', 'Zeit', 'Funkspruch', 'Absender', 'Meldung'];
+            const rows = entries.map(entry => {
+                return [
+                    entry.id,
+                    `${entry.date} ${entry.time}`,
+                    entry.artMeldung,
+                    entry.absender,
+                    `"${entry.meldung.replace(/"/g, '""')}"`
+                ].join(';');
+            });
+            
+            const csvContent = '\uFEFF' + headers.join(';') + '\n' + rows.join('\n');
+            const dataBlob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
-            link.href = url; link.download = `einsatztagebuch_${new Date().toISOString().split('T')[0]}.json`;
-            document.body.appendChild(link); link.click(); document.body.removeChild(link); URL.revokeObjectURL(url);
+            link.href = url; 
+            link.download = `meldungen_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(link); 
+            link.click(); 
+            document.body.removeChild(link); 
+            URL.revokeObjectURL(url);
         }
 
-        function printProtocol() {
-            if (entries.length === 0) { alert('Keine Einträge zum Drucken vorhanden'); return; }
-            window.print();
+        // CSV Export für Patienten (ALLE - inkl. entlassen und ambulant)
+        function exportPatientenCSV() {
+            if (patients.length === 0) { 
+                alert('Keine Patienten zum Exportieren vorhanden'); 
+                return; 
+            }
+            
+            const headers = ['Nummer', 'Name', 'Vorname', 'Alter', 'Geschlecht', 'Sichtung', 'Kategorie', 'Abschnitt', 'Sichtungsort', 'Ort', 'Diagnose', 'Status', 'Aufnahme', 'Entlassung', 'Transport', 'Zielklinik', 'Typ', 'Telefon', 'Adresse'];
+            const rows = patients.map(p => {
+                const status = p.entlassen ? 'Entlassen' : (p.transportiert ? 'Transportiert' : 'Aktiv');
+                const typ = p.isAmbulant ? 'Ambulant' : 'Regulär';
+                return [
+                    p.nummer,
+                    `"${p.nachname}"`,
+                    `"${p.vorname}"`,
+                    p.alter || '',
+                    p.geschlecht || '',
+                    p.sichtung,
+                    p.kategorie,
+                    p.abschnitt,
+                    `"${p.sichtungsort}"`,
+                    `"${p.patientOrt}"`,
+                    `"${p.diagnose.replace(/"/g, '""')}"`,
+                    status,
+                    p.aufnahmezeit,
+                    p.entlassungzeit || '',
+                    p.transport ? p.transport.fahrzeug : '',
+                    p.transport ? p.transport.zielklinik : '',
+                    typ,
+                    p.telefon || '',
+                    `"${p.adresse || ''}"`
+                ].join(';');
+            });
+            
+            const csvContent = '\uFEFF' + headers.join(';') + '\n' + rows.join('\n');
+            const dataBlob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
+            const url = URL.createObjectURL(dataBlob);
+            const link = document.createElement('a');
+            link.href = url; 
+            link.download = `patienten_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(link); 
+            link.click(); 
+            document.body.removeChild(link); 
+            URL.revokeObjectURL(url);
         }
 
         window.onclick = function(event) {
-            const modal = document.getElementById('transportModal');
-            if (event.target === modal) closeTransportModal();
+            const transportModal = document.getElementById('transportModal');
+            const endMissionModal = document.getElementById('endMissionModal');
+            if (event.target === transportModal) closeTransportModal();
+            if (event.target === endMissionModal) closeEndMissionModal();
         }
     </script>
 </body>
