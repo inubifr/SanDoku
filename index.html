@@ -830,6 +830,14 @@
             line-height: 1;
         }
 
+        /* Personen-Daten Grid im Adress-Bereich */
+        .person-data-grid {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 1.5fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
         /* Adresse Section */
         .adresse-grid {
             display: grid;
@@ -1445,6 +1453,7 @@
             .abcde-grid { grid-template-columns: repeat(3, 1fr); }
             .vitalwerte-grid { grid-template-columns: repeat(2, 1fr); }
             .adresse-grid { grid-template-columns: 1fr 1fr; }
+            .person-data-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -1470,6 +1479,7 @@
             .abcde-grid { grid-template-columns: 1fr; }
             .vitalwerte-grid { grid-template-columns: 1fr; }
             .adresse-grid { grid-template-columns: 1fr; }
+            .person-data-grid { grid-template-columns: 1fr; }
             .modal-export-buttons { flex-direction: column; }
         }
     </style>
@@ -1820,33 +1830,8 @@
                             </div>
                         </div>
 
-                        <!-- Persönliche Daten -->
-                        <div class="form-row-4" id="personalDataRow">
-                            <div class="form-group">
-                                <label class="required">Nachname</label>
-                                <input type="text" id="patientNachname" placeholder="Nachname" required tabindex="1">
-                            </div>
-                            <div class="form-group">
-                                <label>Vorname</label>
-                                <input type="text" id="patientVorname" placeholder="Vorname" tabindex="2">
-                            </div>
-                            <div class="form-group ambulant-hide">
-                                <label>Alter</label>
-                                <input type="number" id="patientAlter" placeholder="Alter" min="0" max="150" tabindex="3">
-                            </div>
-                            <div class="form-group">
-                                <label>Geschlecht</label>
-                                <div class="gender-buttons">
-                                    <button type="button" class="btn-gender" onclick="selectGender('männlich')">👨</button>
-                                    <button type="button" class="btn-gender" onclick="selectGender('weiblich')">👩</button>
-                                    <button type="button" class="btn-gender" onclick="selectGender('divers')">⚧</button>
-                                </div>
-                                <input type="hidden" id="patientGeschlecht">
-                            </div>
-                        </div>
-
                         <!-- Ort & Kontakt -->
-                        <div class="form-row-3 ambulant-hide-ort">
+                        <div class="form-row-3">
                             <div class="form-group">
                                 <label class="required">Gesichtet durch</label>
                                 <select id="patientGesichtetDurch" required>
@@ -1880,7 +1865,7 @@
                             </div>
                         </div>
 
-                        <div class="form-row-3 standard-only">
+                        <div class="form-row standard-only">
                             <div class="form-group">
                                 <label class="required">Patientenort / MC</label>
                                 <select id="patientOrt">
@@ -1893,20 +1878,46 @@
                                 <label>Geburtsdatum</label>
                                 <input type="date" id="patientGeburtsdatum">
                             </div>
-                            <div class="form-group ambulant-hide">
-                                <label>Telefon</label>
-                                <input type="tel" id="patientTelefon" placeholder="Telefonnummer" tabindex="10">
-                            </div>
                         </div>
 
-                        <!-- Adresse -->
-                        <div class="compact-section ambulant-hide">
+                        <!-- Personen-Daten & Adresse in einem Bereich -->
+                        <div class="compact-section">
                             <div class="compact-section-header">
-                                <span class="header-icon">🏠</span>
-                                <span>Adresse</span>
+                                <span class="header-icon">👤</span>
+                                <span>Persönliche Daten & Adresse</span>
                             </div>
                             <div class="compact-section-body">
-                                <div class="adresse-grid">
+                                <!-- Persönliche Daten -->
+                                <div class="person-data-grid">
+                                    <div class="form-group">
+                                        <label class="required">Nachname</label>
+                                        <input type="text" id="patientNachname" placeholder="Nachname" required tabindex="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Vorname</label>
+                                        <input type="text" id="patientVorname" placeholder="Vorname" tabindex="2">
+                                    </div>
+                                    <div class="form-group ambulant-hide">
+                                        <label>Alter</label>
+                                        <input type="number" id="patientAlter" placeholder="Alter" min="0" max="150" tabindex="3">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Geschlecht</label>
+                                        <div class="gender-buttons">
+                                            <button type="button" class="btn-gender" onclick="selectGender('männlich')">👨</button>
+                                            <button type="button" class="btn-gender" onclick="selectGender('weiblich')">👩</button>
+                                            <button type="button" class="btn-gender" onclick="selectGender('divers')">⚧</button>
+                                        </div>
+                                        <input type="hidden" id="patientGeschlecht">
+                                    </div>
+                                    <div class="form-group ambulant-hide">
+                                        <label>Telefon</label>
+                                        <input type="tel" id="patientTelefon" placeholder="Telefon" tabindex="10">
+                                    </div>
+                                </div>
+                                
+                                <!-- Adresse -->
+                                <div class="adresse-grid ambulant-hide">
                                     <div class="form-group">
                                         <label>Straße</label>
                                         <input type="text" id="patientStrasse" placeholder="Straße" tabindex="11">
