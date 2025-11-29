@@ -46,8 +46,9 @@
                 --sichtung-gelb: #ffc107;
                 --sichtung-gruen: #28a745;
                 --status-entlassen: #6c757d;
-                --section-header-bg: #1a1a1a;
-                --section-header-text: #ffffff;
+                --section-header-bg: #f8f9fa;
+                --section-header-text: #1a1a1a;
+                --section-header-border: #dc3545;
             }
         }
 
@@ -82,8 +83,9 @@
                 --sichtung-gelb: #ffc107;
                 --sichtung-gruen: #28a745;
                 --status-entlassen: #6c757d;
-                --section-header-bg: #dc3545;
+                --section-header-bg: #3a3a3a;
                 --section-header-text: #ffffff;
+                --section-header-border: #dc3545;
             }
         }
 
@@ -392,6 +394,13 @@
             margin-bottom: 15px;
         }
 
+        .form-row-6 {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
         .standard-messages-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -639,7 +648,7 @@
             line-height: 1;
         }
 
-        /* NEUE Kompakte Sections mit besserer Optik */
+        /* Kompakte Sections - NEUE FARBGEBUNG */
         .compact-section {
             background: var(--bg-secondary);
             border: 2px solid var(--border-color);
@@ -659,7 +668,7 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            border-bottom: 3px solid var(--accent-red);
+            border-bottom: 3px solid var(--section-header-border);
         }
 
         .compact-section-header .header-icon {
@@ -824,7 +833,7 @@
         /* Adresse Section */
         .adresse-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 2fr 1fr;
+            grid-template-columns: 2fr 1fr 1fr 2fr 1.5fr 1.5fr;
             gap: 12px;
         }
 
@@ -1331,6 +1340,7 @@
         .log-entry.patient-entry.sk2 { border-left-color: var(--sichtung-gelb); }
         .log-entry.patient-entry.sk3 { border-left-color: var(--sichtung-gruen); }
         .log-entry.entlassen-entry { border-left-color: var(--status-entlassen); border-left-width: 4px; }
+        .log-entry.resource-entry { border-left-color: var(--accent-cyan); border-left-width: 4px; }
 
         .log-meta {
             display: flex;
@@ -1429,6 +1439,7 @@
             .patients-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
             .verletztenstatus-grid { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); }
             .form-row-5 { grid-template-columns: repeat(2, 1fr); }
+            .form-row-6 { grid-template-columns: repeat(3, 1fr); }
             .kategorie-buttons { flex-wrap: wrap; }
             .btn-kategorie { min-width: 60px; }
             .abcde-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1441,7 +1452,7 @@
             .header-content { flex-direction: column; align-items: flex-start; width: 100%; }
             .logo-container { margin-bottom: 10px; }
             .tabs { overflow-x: auto; width: 100%; }
-            .form-row, .form-row-3, .form-row-4, .form-row-5 { grid-template-columns: 1fr; }
+            .form-row, .form-row-3, .form-row-4, .form-row-5, .form-row-6 { grid-template-columns: 1fr; }
             .standard-messages-grid { grid-template-columns: 1fr; }
             .filter-row { grid-template-columns: 1fr; }
             .log-content { grid-template-columns: 1fr; gap: 5px; }
@@ -1565,17 +1576,6 @@
                         </div>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Funktion</label>
-                            <input type="text" id="funktion" readonly>
-                        </div>
-                        <div class="form-group">
-                            <label class="required">Absender</label>
-                            <input type="text" id="absender" value="FüASs" required>
-                        </div>
-                    </div>
-
                     <div class="standard-messages-grid">
                         <div class="form-group">
                             <label>POSTEN EINSATZBEREIT</label>
@@ -1694,6 +1694,7 @@
                                 <option value="Patientenaufnahme">Patientenaufnahme</option>
                                 <option value="Transport">Transport</option>
                                 <option value="Entlassung">Entlassung</option>
+                                <option value="Ressource">Ressource</option>
                             </select>
                         </div>
                         <div class="filter-group">
@@ -1702,12 +1703,6 @@
                                 <option value="">Alle</option>
                                 <option value="Einfach">Einfach</option>
                                 <option value="Eilig">Eilig</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label>Absender</label>
-                            <select id="filterAbsender" onchange="applyFilters()">
-                                <option value="">Alle</option>
                             </select>
                         </div>
                         <div class="filter-group">
@@ -1795,7 +1790,7 @@
                                         <span>SK3 Grün</span>
                                     </button>
                                 </div>
-                                <input type="hidden" id="patientSichtung" required>
+                                <input type="hidden" id="patientSichtung">
                             </div>
                             <div class="form-group">
                                 <label class="required">Kategorie</label>
@@ -1821,7 +1816,7 @@
                                         <span>Sonst.</span>
                                     </button>
                                 </div>
-                                <input type="hidden" id="patientKategorie" required>
+                                <input type="hidden" id="patientKategorie">
                             </div>
                         </div>
 
@@ -1851,7 +1846,7 @@
                         </div>
 
                         <!-- Ort & Kontakt -->
-                        <div class="form-row-3">
+                        <div class="form-row-3 ambulant-hide-ort">
                             <div class="form-group">
                                 <label class="required">Gesichtet durch</label>
                                 <select id="patientGesichtetDurch" required>
@@ -1885,10 +1880,10 @@
                             </div>
                         </div>
 
-                        <div class="form-row-3">
+                        <div class="form-row-3 standard-only">
                             <div class="form-group">
                                 <label class="required">Patientenort / MC</label>
-                                <select id="patientOrt" required>
+                                <select id="patientOrt">
                                     <option value="">-- Wählen --</option>
                                     <option value="MC 1">MC 1</option>
                                     <option value="MC 2">MC 2</option>
@@ -1929,14 +1924,18 @@
                                         <input type="text" id="patientWohnort" placeholder="Ort" tabindex="14">
                                     </div>
                                     <div class="form-group">
+                                        <label>Land</label>
+                                        <input type="text" id="patientLand" placeholder="Land" value="Deutschland" tabindex="15">
+                                    </div>
+                                    <div class="form-group">
                                         <label>Kontaktperson</label>
-                                        <input type="text" id="patientKontaktperson" placeholder="Angehörige" tabindex="15">
+                                        <input type="text" id="patientKontaktperson" placeholder="Angehörige" tabindex="16">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- ABCDE Beurteilung - NEU GESTALTET -->
+                        <!-- ABCDE Beurteilung -->
                         <div class="compact-section medical-deep-data">
                             <div class="compact-section-header">
                                 <span class="header-icon">🩺</span>
@@ -2015,7 +2014,7 @@
                             </div>
                         </div>
 
-                        <!-- Vitalwerte - NEU GESTALTET -->
+                        <!-- Vitalwerte -->
                         <div class="compact-section medical-deep-data">
                             <div class="compact-section-header">
                                 <span class="header-icon">💓</span>
@@ -2069,7 +2068,7 @@
                             </div>
                         </div>
 
-                        <!-- Status / Maßnahmen - NEU GESTALTET -->
+                        <!-- Status / Maßnahmen -->
                         <div class="compact-section medical-deep-data">
                             <div class="compact-section-header">
                                 <span class="header-icon">⚡</span>
@@ -2153,7 +2152,7 @@
                         <div class="form-row medical-deep-data transport-section">
                             <div class="form-group">
                                 <label>Zielort</label>
-                                <input type="text" id="patientTransportziel" placeholder="z.B. Klinikum">
+                                <input type="text" id="patientTransportziel" placeholder="z.B. Uniklinik">
                             </div>
                             <div class="form-group">
                                 <label>Ressource zuweisen (Nur Status 1)</label>
@@ -2227,7 +2226,7 @@
                 </div>
                 <div class="form-group">
                     <label class="required">Zielklinik</label>
-                    <input type="text" id="transportZielklinik" placeholder="z.B. Klinikum Stuttgart" required>
+                    <input type="text" id="transportZielklinik" placeholder="z.B. Uniklinik" required>
                 </div>
                 <div class="button-row">
                     <button type="submit" class="btn-send">Transport starten</button>
@@ -2272,10 +2271,25 @@
     </div>
 
     <script>
+        // Globale Reload-Warnung
+        let dataExists = false;
+        
+        window.addEventListener('beforeunload', function(e) {
+            if (dataExists) {
+                const message = 'Achtung! Wenn Sie die Seite verlassen oder neu laden, werden alle Einsatzdaten unwiderruflich gelöscht!';
+                e.preventDefault();
+                e.returnValue = message;
+                return message;
+            }
+        });
+
+        function updateDataExists() {
+            dataExists = entries.length > 0 || patients.length > 0 || resources.length > 0;
+        }
+
         let entryCounter = 0;
         let patientCounter = 0;
         const entries = [];
-        const absenderSet = new Set();
         const fahrzeugSet = new Set();
         let resources = [];
         let patients = [];
@@ -2321,7 +2335,6 @@
             document.getElementById('loginScreen').classList.add('hidden');
             document.getElementById('mainApp').style.display = 'block';
             document.getElementById('currentUserFunction').textContent = funktion;
-            document.getElementById('funktion').value = funktion;
             
             applyViewRestrictions();
         }
@@ -2389,15 +2402,14 @@
             entries.length = 0;
             patients.length = 0;
             resources.length = 0;
-            absenderSet.clear();
             fahrzeugSet.clear();
             
             // UI aktualisieren
             renderEntries();
             renderPatients();
             renderResources();
-            updateAbsenderFilter();
             updateFahrzeugFilter();
+            updateDataExists();
             
             closeEndMissionModal();
             alert('Einsatz wurde beendet. Alle Daten wurden gelöscht.');
@@ -2415,6 +2427,11 @@
             
             event.target.classList.add('active');
             document.getElementById(`tab-${tabName}`).classList.add('active');
+            
+            // Beim Wechsel zum Patienten-Tab: Formular verstecken, Übersicht zeigen
+            if (tabName === 'patienten') {
+                togglePatientForm(false);
+            }
         }
 
         // Toggle Patient Form
@@ -2433,12 +2450,14 @@
                     document.querySelectorAll('.medical-deep-data').forEach(el => el.classList.add('hidden'));
                     document.querySelectorAll('.ambulant-hide').forEach(el => el.classList.add('hidden'));
                     document.querySelectorAll('.ambulant-hide-extra').forEach(el => el.classList.add('hidden'));
+                    document.querySelectorAll('.standard-only').forEach(el => el.classList.add('hidden'));
                     document.getElementById('sichtungGroup').classList.add('hidden');
                     document.getElementById('formTitle').textContent = 'Ambulante Versorgung aufnehmen';
                 } else {
                     document.querySelectorAll('.medical-deep-data').forEach(el => el.classList.remove('hidden'));
                     document.querySelectorAll('.ambulant-hide').forEach(el => el.classList.remove('hidden'));
                     document.querySelectorAll('.ambulant-hide-extra').forEach(el => el.classList.remove('hidden'));
+                    document.querySelectorAll('.standard-only').forEach(el => el.classList.remove('hidden'));
                     document.getElementById('sichtungGroup').classList.remove('hidden');
                     document.getElementById('formTitle').textContent = 'Neuen Patienten aufnehmen';
                     
@@ -2609,18 +2628,31 @@
         function addPatient() {
             const nachname = document.getElementById('patientNachname').value;
             const diagnose = document.getElementById('patientDiagnose').value;
-            const patientOrt = document.getElementById('patientOrt').value;
-
-            if (!nachname || !diagnose || !patientOrt) {
-                alert("Bitte füllen Sie alle Pflichtfelder (Nachname, Ort, Diagnose) aus.");
+            const kategorie = document.getElementById('patientKategorie').value;
+            const gesichtetDurch = document.getElementById('patientGesichtetDurch').value;
+            const sichtungsort = document.getElementById('patientSichtungsort').value;
+            const abschnitt = document.getElementById('patientAbschnitt').value;
+            
+            // Validierung für alle Modi
+            if (!nachname || !diagnose || !kategorie || !gesichtetDurch || !sichtungsort || !abschnitt) {
+                alert("Bitte füllen Sie alle Pflichtfelder aus (Nachname, Diagnose, Kategorie, Gesichtet durch, Sichtungsort, Abschnitt).");
                 return;
+            }
+            
+            // Zusätzliche Validierung für Nicht-Ambulant
+            if (!isAmbulantEntry) {
+                const sichtung = document.getElementById('patientSichtung').value;
+                const patientOrt = document.getElementById('patientOrt').value;
+                if (!sichtung || !patientOrt) {
+                    alert("Bitte füllen Sie alle Pflichtfelder aus (Sichtungskategorie, Patientenort).");
+                    return;
+                }
             }
 
             patientCounter++;
             
             const sichtung = isAmbulantEntry ? 'SK3' : document.getElementById('patientSichtung').value;
-            const gesichtetDurch = document.getElementById('patientGesichtetDurch').value;
-            const kategorie = document.getElementById('patientKategorie').value;
+            const patientOrt = isAmbulantEntry ? 'Ambulant' : document.getElementById('patientOrt').value;
             
             let assignedResourceName = null;
             let transportInfo = null;
@@ -2643,11 +2675,12 @@
             }
 
             // Adresse zusammenbauen
-            const strasse = document.getElementById('patientStrasse').value;
-            const hausnummer = document.getElementById('patientHausnummer').value;
-            const plz = document.getElementById('patientPLZ').value;
-            const wohnort = document.getElementById('patientWohnort').value;
-            const adresseComplete = [strasse, hausnummer, plz, wohnort].filter(Boolean).join(', ');
+            const strasse = isAmbulantEntry ? '' : document.getElementById('patientStrasse').value;
+            const hausnummer = isAmbulantEntry ? '' : document.getElementById('patientHausnummer').value;
+            const plz = isAmbulantEntry ? '' : document.getElementById('patientPLZ').value;
+            const wohnort = isAmbulantEntry ? '' : document.getElementById('patientWohnort').value;
+            const land = isAmbulantEntry ? '' : document.getElementById('patientLand').value;
+            const adresseComplete = [strasse, hausnummer, plz, wohnort, land].filter(Boolean).join(', ');
 
             const patient = {
                 id: Date.now(),
@@ -2656,19 +2689,20 @@
                 sichtung: sichtung,
                 gesichtetDurch: gesichtetDurch,
                 patientOrt: patientOrt,
-                sichtungsort: document.getElementById('patientSichtungsort').value,
-                abschnitt: document.getElementById('patientAbschnitt').value,
+                sichtungsort: sichtungsort,
+                abschnitt: abschnitt,
                 nachname: nachname,
                 vorname: document.getElementById('patientVorname').value || '',
                 alter: isAmbulantEntry ? '' : document.getElementById('patientAlter').value,
                 geburtsdatum: isAmbulantEntry ? '' : document.getElementById('patientGeburtsdatum').value,
                 geschlecht: document.getElementById('patientGeschlecht').value,
                 telefon: isAmbulantEntry ? '' : document.getElementById('patientTelefon').value,
-                strasse: isAmbulantEntry ? '' : strasse,
-                hausnummer: isAmbulantEntry ? '' : hausnummer,
-                plz: isAmbulantEntry ? '' : plz,
-                wohnort: isAmbulantEntry ? '' : wohnort,
-                adresse: isAmbulantEntry ? '' : adresseComplete,
+                strasse: strasse,
+                hausnummer: hausnummer,
+                plz: plz,
+                wohnort: wohnort,
+                land: land,
+                adresse: adresseComplete,
                 kontaktperson: isAmbulantEntry ? '' : document.getElementById('patientKontaktperson').value,
                 allergien: isAmbulantEntry ? '' : document.getElementById('patientAllergien').value,
                 airway: isAmbulantEntry ? '' : document.getElementById('patientAirway').value,
@@ -2701,20 +2735,16 @@
                 timestamp: new Date().toLocaleString('de-DE'),
                 artMeldung: 'Patientenaufnahme',
                 vorrangstufe: 'Einfach',
-                absender: gesichtetDurch,
+                absender: currentUserFunction,
                 funktion: currentUserFunction,
                 fahrzeug: assignedResourceName || null,
                 sichtung: sichtung,
-                meldung: `Patient #${patientCounter} aufgenommen (${isAmbulantEntry ? 'Ambulant' : 'Regulär'}) - ${kategorie} - ${sichtung} - ${patient.abschnitt} - ${patient.sichtungsort} - Ort: ${patientOrt}${assignedResourceName ? ' - Ressource ' + assignedResourceName + ' zugewiesen' : ''}`
+                meldung: `Patient #${patientCounter} aufgenommen (${isAmbulantEntry ? 'Ambulant' : 'Regulär'}) - ${kategorie} - ${sichtung} - ${patient.abschnitt} - ${patient.sichtungsort}${!isAmbulantEntry ? ' - Ort: ' + patientOrt : ''}${assignedResourceName ? ' - Ressource ' + assignedResourceName + ' zugewiesen' : ''}`
             };
             
             entries.unshift(entry);
             
-            if (!absenderSet.has(gesichtetDurch)) {
-                absenderSet.add(gesichtetDurch);
-                updateAbsenderFilter();
-            }
-            
+            updateDataExists();
             renderPatients();
             renderEntries();
             renderMCLog();
@@ -2747,7 +2777,9 @@
             }
 
             document.getElementById('patientGesichtetDurch').value = patient.gesichtetDurch;
-            document.getElementById('patientOrt').value = patient.patientOrt;
+            if (!patient.isAmbulant) {
+                document.getElementById('patientOrt').value = patient.patientOrt;
+            }
             document.getElementById('patientSichtungsort').value = patient.sichtungsort;
             document.getElementById('patientAbschnitt').value = patient.abschnitt;
             document.getElementById('patientNachname').value = patient.nachname;
@@ -2761,6 +2793,7 @@
                 document.getElementById('patientHausnummer').value = patient.hausnummer || '';
                 document.getElementById('patientPLZ').value = patient.plz || '';
                 document.getElementById('patientWohnort').value = patient.wohnort || '';
+                document.getElementById('patientLand').value = patient.land || 'Deutschland';
                 document.getElementById('patientKontaktperson').value = patient.kontaktperson || '';
                 document.getElementById('patientAllergien').value = patient.allergien || '';
                 document.getElementById('patientVerletzungsbereich').value = patient.verletzungsbereich;
@@ -2810,9 +2843,9 @@
 
             const nachname = document.getElementById('patientNachname').value;
             const diagnose = document.getElementById('patientDiagnose').value;
-            const patientOrt = document.getElementById('patientOrt').value;
+            const patientOrt = patient.isAmbulant ? 'Ambulant' : document.getElementById('patientOrt').value;
 
-            if (!nachname || !diagnose || !patientOrt) {
+            if (!nachname || !diagnose || (!patient.isAmbulant && !patientOrt)) {
                 alert("Bitte füllen Sie alle Pflichtfelder aus.");
                 return;
             }
@@ -2822,7 +2855,9 @@
                 patient.sichtung = document.getElementById('patientSichtung').value;
             }
             patient.gesichtetDurch = document.getElementById('patientGesichtetDurch').value;
-            patient.patientOrt = patientOrt;
+            if (!patient.isAmbulant) {
+                patient.patientOrt = patientOrt;
+            }
             patient.sichtungsort = document.getElementById('patientSichtungsort').value;
             patient.abschnitt = document.getElementById('patientAbschnitt').value;
             patient.nachname = nachname;
@@ -2838,8 +2873,9 @@
                 patient.hausnummer = document.getElementById('patientHausnummer').value;
                 patient.plz = document.getElementById('patientPLZ').value;
                 patient.wohnort = document.getElementById('patientWohnort').value;
+                patient.land = document.getElementById('patientLand').value;
                 patient.kontaktperson = document.getElementById('patientKontaktperson').value;
-                patient.adresse = [patient.strasse, patient.hausnummer, patient.plz, patient.wohnort].filter(Boolean).join(', ');
+                patient.adresse = [patient.strasse, patient.hausnummer, patient.plz, patient.wohnort, patient.land].filter(Boolean).join(', ');
                 patient.allergien = document.getElementById('patientAllergien').value;
                 patient.verletzungsbereich = document.getElementById('patientVerletzungsbereich').value;
                 patient.airway = document.getElementById('patientAirway').value;
@@ -2862,7 +2898,7 @@
                 timestamp: new Date().toLocaleString('de-DE'),
                 artMeldung: 'Maßnahme',
                 vorrangstufe: 'Einfach',
-                absender: patient.gesichtetDurch,
+                absender: currentUserFunction,
                 funktion: currentUserFunction,
                 fahrzeug: null,
                 sichtung: patient.sichtung,
@@ -2871,6 +2907,7 @@
             
             entries.unshift(entry);
 
+            updateDataExists();
             renderPatients();
             renderEntries();
             renderMCLog();
@@ -2884,6 +2921,7 @@
             document.getElementById('editPatientId').value = '';
             
             document.getElementById('patientForm').reset();
+            document.getElementById('patientLand').value = 'Deutschland';
             document.querySelectorAll('.btn-sichtung-compact').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.btn-gender').forEach(btn => btn.classList.remove('active'));
             document.querySelectorAll('.btn-verletztenstatus').forEach(btn => btn.classList.remove('active'));
@@ -2952,10 +2990,12 @@
                             <span class="patient-compact-label">Kat / Alter:</span>
                             <span class="patient-compact-value">${patient.kategorie} ${patient.alter ? ' / ' + patient.alter + 'J' : ''}</span>
                         </div>
+                        ${!patient.isAmbulant ? `
                         <div class="patient-compact-row">
                             <span class="patient-compact-label">Ort:</span>
                             <span class="patient-compact-value">${patient.patientOrt}</span>
                         </div>
+                        ` : ''}
                         <div class="patient-compact-row">
                             <span class="patient-compact-label">Diagnose:</span>
                             <span class="patient-compact-value">${patient.diagnose}</span>
@@ -2992,7 +3032,7 @@
                 timestamp: new Date().toLocaleString('de-DE'),
                 artMeldung: 'Entlassung',
                 vorrangstufe: 'Einfach',
-                absender: patient.gesichtetDurch,
+                absender: currentUserFunction,
                 funktion: currentUserFunction,
                 fahrzeug: null,
                 sichtung: patient.sichtung,
@@ -3000,6 +3040,7 @@
             };
             
             entries.unshift(entry);
+            updateDataExists();
             renderPatients();
             renderEntries();
             renderMCLog();
@@ -3049,7 +3090,7 @@
                 timestamp: new Date().toLocaleString('de-DE'),
                 artMeldung: 'Transport',
                 vorrangstufe: 'Einfach',
-                absender: patient.gesichtetDurch,
+                absender: currentUserFunction,
                 funktion: currentUserFunction,
                 fahrzeug: fahrzeug,
                 sichtung: patient.sichtung,
@@ -3066,6 +3107,7 @@
             const resource = resources.find(r => r.name === fahrzeug);
             if (resource) setResourceStatus(resource.id, '3');
             
+            updateDataExists();
             renderPatients();
             renderEntries();
             renderMCLog();
@@ -3079,16 +3121,61 @@
             
             if (!name) { alert('Bitte geben Sie ein Kennzeichen / Namen ein'); return; }
             
-            const resource = { id: Date.now(), type: type, name: name, status: null };
+            const resource = { id: Date.now(), type: type, name: name, status: '1' };
             resources.push(resource);
             document.getElementById('newResourceName').value = '';
+            
+            // Protokolleintrag für neue Ressource mit Status 1
+            const entry = {
+                id: ++entryCounter,
+                date: new Date().toLocaleDateString('de-DE'),
+                time: new Date().toLocaleTimeString('de-DE'),
+                timestamp: new Date().toLocaleString('de-DE'),
+                artMeldung: 'Ressource',
+                vorrangstufe: 'Einfach',
+                absender: currentUserFunction,
+                funktion: currentUserFunction,
+                fahrzeug: name,
+                meldung: `Ressource ${name} (${type}) hinzugefügt - Status 1 - Einsatzbereit`
+            };
+            entries.unshift(entry);
+            
+            if (!fahrzeugSet.has(name)) {
+                fahrzeugSet.add(name);
+                updateFahrzeugFilter();
+            }
+            
+            updateDataExists();
             renderResources();
+            renderEntries();
+            renderMCLog();
             updateResourceDropdown();
         }
 
         function deleteResource(id) {
+            const resource = resources.find(r => r.id === id);
+            if (!resource) return;
+            
+            // Protokolleintrag für entlassene Ressource
+            const entry = {
+                id: ++entryCounter,
+                date: new Date().toLocaleDateString('de-DE'),
+                time: new Date().toLocaleTimeString('de-DE'),
+                timestamp: new Date().toLocaleString('de-DE'),
+                artMeldung: 'Ressource',
+                vorrangstufe: 'Einfach',
+                absender: currentUserFunction,
+                funktion: currentUserFunction,
+                fahrzeug: resource.name,
+                meldung: `Ressource ${resource.name} (${resource.type}) aus dem Einsatz entlassen`
+            };
+            entries.unshift(entry);
+            
             resources = resources.filter(r => r.id !== id);
+            updateDataExists();
             renderResources();
+            renderEntries();
+            renderMCLog();
             updateFahrzeugFilter();
             updateResourceDropdown();
         }
@@ -3112,7 +3199,6 @@
             if (!resource) return;
             
             resource.status = status;
-            const absender = document.getElementById('absender').value;
             const statusText = statusTexts[status];
             
             const entry = {
@@ -3122,16 +3208,16 @@
                 timestamp: new Date().toLocaleString('de-DE'),
                 artMeldung: 'Funkspruch',
                 vorrangstufe: 'Einfach',
-                absender: absender,
+                absender: currentUserFunction,
                 funktion: currentUserFunction,
                 fahrzeug: resource.name,
                 meldung: `${resource.name} Status ${status} - ${statusText}`
             };
             
             entries.unshift(entry);
-            if (!absenderSet.has(absender)) { absenderSet.add(absender); updateAbsenderFilter(); }
             if (!fahrzeugSet.has(resource.name)) { fahrzeugSet.add(resource.name); updateFahrzeugFilter(); }
             
+            updateDataExists();
             renderResources();
             renderEntries();
             renderMCLog();
@@ -3172,7 +3258,6 @@
         function addLogEntry() {
             entryCounter++;
             const now = new Date();
-            const absender = document.getElementById('absender').value;
             const entry = {
                 id: entryCounter,
                 date: now.toLocaleDateString('de-DE'),
@@ -3180,26 +3265,16 @@
                 timestamp: now.toLocaleString('de-DE'),
                 artMeldung: document.getElementById('artMeldung').value,
                 vorrangstufe: document.getElementById('vorrangstufe').value,
-                absender: absender,
+                absender: currentUserFunction,
                 funktion: currentUserFunction,
                 fahrzeug: null,
                 meldung: document.getElementById('meldung').value
             };
             entries.unshift(entry);
-            if (!absenderSet.has(absender)) { absenderSet.add(absender); updateAbsenderFilter(); }
+            updateDataExists();
             renderEntries();
             renderMCLog();
             clearForm();
-        }
-
-        function updateAbsenderFilter() {
-            const filterAbsender = document.getElementById('filterAbsender');
-            const currentValue = filterAbsender.value;
-            filterAbsender.innerHTML = '<option value="">Alle</option>';
-            Array.from(absenderSet).sort().forEach(absender => {
-                const option = document.createElement('option'); option.value = absender; option.textContent = absender; filterAbsender.appendChild(option);
-            });
-            filterAbsender.value = currentValue;
         }
 
         function updateFahrzeugFilter() {
@@ -3225,12 +3300,14 @@
                 const priorityClass = entry.vorrangstufe.toLowerCase();
                 const isPatientEntry = entry.artMeldung === 'Patientenaufnahme' || entry.artMeldung === 'Transport';
                 const isEntlassenEntry = entry.artMeldung === 'Entlassung';
+                const isResourceEntry = entry.artMeldung === 'Ressource';
                 const hasSichtung = entry.sichtung;
                 let classes = `log-entry ${priorityClass !== 'einfach' ? 'priority-' + priorityClass : ''}`;
                 if (isPatientEntry && hasSichtung) classes += ` patient-entry ${entry.sichtung.toLowerCase()}`;
                 if (isEntlassenEntry) classes += ' entlassen-entry';
+                if (isResourceEntry) classes += ' resource-entry';
                 
-                return `<div class="${classes}" data-art="${entry.artMeldung}" data-vorrang="${entry.vorrangstufe}" data-absender="${entry.absender}" data-fahrzeug="${entry.fahrzeug || ''}"><div class="log-meta"><span class="log-number">#${String(entry.id).padStart(3, '0')}</span><span class="log-time">${entry.date} ${entry.time}</span><span>${entry.artMeldung}</span>${entry.funktion ? `<span class="log-function">[${entry.funktion}]</span>` : ''}<span class="priority-badge priority-${priorityClass}">${entry.vorrangstufe}</span>${hasSichtung ? `<span class="sichtung-badge ${entry.sichtung.toLowerCase()}">${entry.sichtung}</span>` : ''}</div><div class="log-content"><div class="log-label">Absender:</div><div class="log-value">${entry.absender}</div></div><div class="log-message"><div class="log-label">Meldung:</div><div class="log-value">${entry.meldung}</div></div></div>`;
+                return `<div class="${classes}" data-art="${entry.artMeldung}" data-vorrang="${entry.vorrangstufe}" data-absender="${entry.absender}" data-fahrzeug="${entry.fahrzeug || ''}"><div class="log-meta"><span class="log-number">#${String(entry.id).padStart(3, '0')}</span><span class="log-time">${entry.date} ${entry.time}</span><span>${entry.artMeldung}</span>${entry.funktion ? `<span class="log-function">[${entry.funktion}]</span>` : ''}<span class="priority-badge priority-${priorityClass}">${entry.vorrangstufe}</span>${hasSichtung ? `<span class="sichtung-badge ${entry.sichtung.toLowerCase()}">${entry.sichtung}</span>` : ''}</div><div class="log-message"><div class="log-value">${entry.meldung}</div></div></div>`;
             }).join('');
             document.getElementById('totalCount').textContent = entries.length;
             updateFahrzeugFilter();
@@ -3253,7 +3330,6 @@
         function applyFilters() {
             const filterArt = document.getElementById('filterArt').value;
             const filterVorrang = document.getElementById('filterVorrang').value;
-            const filterAbsender = document.getElementById('filterAbsender').value;
             const filterFahrzeug = document.getElementById('filterFahrzeug').value;
             
             const allEntries = document.querySelectorAll('#logEntries .log-entry');
@@ -3262,15 +3338,13 @@
             allEntries.forEach(entry => {
                 const art = entry.dataset.art;
                 const vorrang = entry.dataset.vorrang;
-                const absender = entry.dataset.absender;
                 const fahrzeug = entry.dataset.fahrzeug;
                 
                 const artMatch = !filterArt || art === filterArt;
                 const vorrangMatch = !filterVorrang || vorrang === filterVorrang;
-                const absenderMatch = !filterAbsender || absender === filterAbsender;
                 const fahrzeugMatch = !filterFahrzeug || fahrzeug === filterFahrzeug;
                 
-                if (artMatch && vorrangMatch && absenderMatch && fahrzeugMatch) {
+                if (artMatch && vorrangMatch && fahrzeugMatch) {
                     entry.classList.remove('hidden'); visibleCount++;
                 } else {
                     entry.classList.add('hidden');
@@ -3283,7 +3357,6 @@
         function resetFilters() {
             document.getElementById('filterArt').value = '';
             document.getElementById('filterVorrang').value = '';
-            document.getElementById('filterAbsender').value = '';
             document.getElementById('filterFahrzeug').value = '';
             applyFilters();
         }
@@ -3293,8 +3366,6 @@
             document.querySelectorAll('.standard-messages-grid select').forEach(select => { select.selectedIndex = 0; });
             document.getElementById('artMeldung').value = 'Funkspruch';
             document.getElementById('vorrangstufe').value = 'Einfach';
-            document.getElementById('absender').value = 'FüASs';
-            document.getElementById('funktion').value = currentUserFunction || '';
         }
 
         // CSV Export für Meldungen
@@ -3304,13 +3375,14 @@
                 return; 
             }
             
-            const headers = ['Nummer', 'Zeit', 'Funkspruch', 'Absender', 'Meldung'];
+            const headers = ['Nummer', 'Zeit', 'Art', 'Funktion', 'Fahrzeug', 'Meldung'];
             const rows = entries.map(entry => {
                 return [
                     entry.id,
                     `${entry.date} ${entry.time}`,
                     entry.artMeldung,
-                    entry.absender,
+                    entry.funktion || '',
+                    entry.fahrzeug || '',
                     `"${entry.meldung.replace(/"/g, '""')}"`
                 ].join(';');
             });
@@ -3327,37 +3399,79 @@
             URL.revokeObjectURL(url);
         }
 
-        // CSV Export für Patienten (ALLE - inkl. entlassen und ambulant)
+        // CSV Export für Patienten - ALLE FELDER
         function exportPatientenCSV() {
             if (patients.length === 0) { 
                 alert('Keine Patienten zum Exportieren vorhanden'); 
                 return; 
             }
             
-            const headers = ['Nummer', 'Name', 'Vorname', 'Alter', 'Geschlecht', 'Sichtung', 'Kategorie', 'Abschnitt', 'Sichtungsort', 'Ort', 'Diagnose', 'Status', 'Aufnahme', 'Entlassung', 'Transport', 'Zielklinik', 'Typ', 'Telefon', 'Adresse'];
+            const headers = [
+                'Nummer', 'Nachname', 'Vorname', 'Alter', 'Geburtsdatum', 'Geschlecht',
+                'Sichtung', 'Kategorie', 'Abschnitt', 'Sichtungsort', 'Gesichtet durch', 'Patientenort',
+                'Strasse', 'Hausnummer', 'PLZ', 'Wohnort', 'Land', 'Telefon', 'Kontaktperson',
+                'Allergien', 'Verletzungsbereich', 'Diagnose',
+                'Airway', 'Breathing', 'Circulation', 'Disability', 'Exposure',
+                'GCS', 'Schmerzskala', 'Pupillen',
+                'Verletztenstatus', 'Vitalwerte BZ', 'Vitalwerte RR', 'Vitalwerte Puls', 'Vitalwerte SpO2',
+                'Transportziel', 'Transport Fahrzeug', 'Transport Zielklinik', 'Transport Zeitpunkt',
+                'Aufnahmezeit', 'Entlassungzeit', 'Status', 'Typ'
+            ];
+            
             const rows = patients.map(p => {
                 const status = p.entlassen ? 'Entlassen' : (p.transportiert ? 'Transportiert' : 'Aktiv');
                 const typ = p.isAmbulant ? 'Ambulant' : 'Regulär';
+                
+                // Vitalwerte formatieren
+                const bzStr = p.vitalwerte.bz.map(v => `${v.time}:${v.value}`).join('|');
+                const rrStr = p.vitalwerte.rr.map(v => `${v.time}:${v.sys}/${v.dia}`).join('|');
+                const pulsStr = p.vitalwerte.puls.map(v => `${v.time}:${v.value}`).join('|');
+                const spo2Str = p.vitalwerte.spo2.map(v => `${v.time}:${v.value}`).join('|');
+                
                 return [
                     p.nummer,
                     `"${p.nachname}"`,
                     `"${p.vorname}"`,
                     p.alter || '',
+                    p.geburtsdatum || '',
                     p.geschlecht || '',
                     p.sichtung,
                     p.kategorie,
                     p.abschnitt,
                     `"${p.sichtungsort}"`,
+                    p.gesichtetDurch,
                     `"${p.patientOrt}"`,
+                    `"${p.strasse || ''}"`,
+                    `"${p.hausnummer || ''}"`,
+                    `"${p.plz || ''}"`,
+                    `"${p.wohnort || ''}"`,
+                    `"${p.land || ''}"`,
+                    `"${p.telefon || ''}"`,
+                    `"${p.kontaktperson || ''}"`,
+                    `"${(p.allergien || '').replace(/"/g, '""')}"`,
+                    `"${(p.verletzungsbereich || '').replace(/"/g, '""')}"`,
                     `"${p.diagnose.replace(/"/g, '""')}"`,
-                    status,
+                    p.airway || '',
+                    p.breathing || '',
+                    p.circulation || '',
+                    p.disability || '',
+                    p.exposure || '',
+                    p.gcs || '',
+                    p.schmerzskala || '',
+                    p.pupillen || '',
+                    `"${p.verletztenstatus.join(',')}"`,
+                    `"${bzStr}"`,
+                    `"${rrStr}"`,
+                    `"${pulsStr}"`,
+                    `"${spo2Str}"`,
+                    `"${p.transportziel || ''}"`,
+                    p.transport ? p.transport.fahrzeug : '',
+                    p.transport ? `"${p.transport.zielklinik}"` : '',
+                    p.transport ? p.transport.zeitpunkt : '',
                     p.aufnahmezeit,
                     p.entlassungzeit || '',
-                    p.transport ? p.transport.fahrzeug : '',
-                    p.transport ? p.transport.zielklinik : '',
-                    typ,
-                    p.telefon || '',
-                    `"${p.adresse || ''}"`
+                    status,
+                    typ
                 ].join(';');
             });
             
